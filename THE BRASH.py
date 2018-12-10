@@ -60,25 +60,11 @@ class Window(QMainWindow):
         brashMenu.addAction(ninepxAction)
         ninepxAction.triggered.connect(self.ninePx)
 
-        blackAction = QAction("Black", self)
+        blackAction = QAction("change color", self)
         blackAction.setShortcut("Ctrl+B")
         brashColor.addAction(blackAction)
-        blackAction.triggered.connect(self.blackColor)
+        blackAction.triggered.connect(self.run)
 
-        redAction = QAction("Red", self)
-        redAction.setShortcut("Ctrl+W")
-        brashColor.addAction(redAction)
-        redAction.triggered.connect(self.redColor)
-
-        greenAction = QAction("Green", self)
-        greenAction.setShortcut("Ctrl+G")
-        brashColor.addAction(greenAction)
-        greenAction.triggered.connect(self.greenColor)
-
-        yellowAction = QAction("Yellow", self)
-        yellowAction.setShortcut("Ctrl+G")
-        brashColor.addAction(yellowAction)
-        yellowAction.triggered.connect(self.yellowColor)
 
     def mousePressEvent(self, event):
         if event.button() == Qt.LeftButton:
@@ -127,15 +113,10 @@ class Window(QMainWindow):
     def blackColor(self):
         self.brushColor = Qt.black
 
-    def redColor(self):
-        self.brushColor = Qt.red
-
-    def greenColor(self):
-        self.brushColor = Qt.green
-
-    def yellowColor(self):
-        self.brushColor = Qt.yellow
-
+    def run(self):
+        color = QColorDialog.getColor()
+        if color.isValid():
+            self.brushColor = color
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

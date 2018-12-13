@@ -63,7 +63,7 @@ class Window(QMainWindow):
         blackAction = QAction("change color", self)
         blackAction.setShortcut("Ctrl+B")
         brashColor.addAction(blackAction)
-        blackAction.triggered.connect(self.run)
+        blackAction.triggered.connect(self.color)
 
 
     def mousePressEvent(self, event):
@@ -110,10 +110,7 @@ class Window(QMainWindow):
     def ninePx(self):
         self.brushSize = 9
 
-    def blackColor(self):
-        self.brushColor = Qt.black
-
-    def run(self):
+    def color(self):
         color = QColorDialog.getColor()
         if color.isValid():
             self.brushColor = color

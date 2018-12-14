@@ -1,198 +1,298 @@
-from PyQt5.QtWidgets import *
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
-import sys
+from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Window(QMainWindow):
-    def __init__(self):
-        super().__init__()
+class Ui_MainWindow(object):
+    def UI_FOR_PROJECT(self, Window):
+        self.centralWidget = QtWidgets.QWidget(Window)
 
-        self.setWindowTitle("PAINT v.2")
-        self.setGeometry(400, 400, 800, 600)
+        SizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Maximum)
+        SizePolicy.setHorizontalStretch(0)
+        SizePolicy.setVerticalStretch(0)
+        SizePolicy.setHeightForWidth(self.centralWidget.sizePolicy().hasHeightForWidth())
 
-        self.image = QImage(self.size(), QImage.Format_RGB32)
-        self.image.fill(Qt.white)
+        self.centralWidget.setSizePolicy(SizePolicy)
+        self.centralWidget.setObjectName("Центральный виджет")
 
-        self.drawing = False
-        self.brushSize = 3
-        self.brushColor = Qt.black
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.centralWidget)
+        self.verticalLayout.setContentsMargins(11, 11, 11, 11)
+        self.verticalLayout.setSpacing(6)
+        self.verticalLayout.setObjectName("Вертикальное расположение")
 
-        self.lastPoint = QPoint()
+        self.horizontalLayout = QtWidgets.QHBoxLayout()
+        self.horizontalLayout.setSizeConstraint(QtWidgets.QLayout.SetDefaultConstraint)
+        self.horizontalLayout.setSpacing(6)
+        self.horizontalLayout.setObjectName("Горизонтальное расположение")
 
-        MainMenu = self.menuBar()
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_2.setSpacing(6)
+        self.verticalLayout_2.setObjectName("Вертикальное расположение 2")
 
-        # Первая менюшка Файл - Сохранить
-        FileMenu = MainMenu.addMenu("Файл")
+        self.widget = QtWidgets.QWidget(self.centralWidget)
 
-        # Сохранить --> Сохранение
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Maximum)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.widget.sizePolicy().hasHeightForWidth())
 
-        FileSaveAction = QAction("Сохранить", self)
-        FileSaveAction.setShortcut("Ctrl+S")
-        FileMenu.addAction(FileSaveAction)
-        FileSaveAction.triggered.connect(self.save)
+        self.widget.setSizePolicy(sizePolicy)
+        self.widget.setObjectName("Виджет")
 
-        # Вторая менюшка Редакция --> и там мнго разного
+        self.gridLayout = QtWidgets.QGridLayout(self.widget)
+        self.gridLayout.setContentsMargins(11, 11, 11, 11)
+        self.gridLayout.setSpacing(15)
+        self.gridLayout.setObjectName("Макет сетки")
 
-        RevisionMenu = MainMenu.addMenu("Редактировать")
-        """Дальше пошел код для редакции файла: Очистка, Кисточка (её размеры и цвета), 
-        Ластик, Фигуры (Прямоугольник, Треугольник, Круг), Заливка"""
+        self.rectButton = QtWidgets.QPushButton(self.widget)
+        self.rectButton.setMinimumSize(QtCore.QSize(30, 30))
+        self.rectButton.setMaximumSize(QtCore.QSize(30, 30))
+        self.rectButton.setText("")
 
-        # Редакция --> Очистка
+        quadrilateralicon = QtGui.QIcon()
+        quadrilateralicon.addPixmap(QtGui.QPixmap("icons/четырёхугольник.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
 
-        clearAction = QAction("Очистка", self)
-        clearAction.setShortcut("Ctrl+C")
-        RevisionMenu.addAction(clearAction)
-        clearAction.triggered.connect(self.clear)
+        self.rectButton.setIcon(quadrilateralicon)
+        self.rectButton.setCheckable(True)
+        self.rectButton.setObjectName("Кнопка для четырёхугольника")
 
-        # Редакция --> Кисточка
+        self.gridLayout.addWidget(self.rectButton, 6, 0, 1, 1)
 
-        BrashMenu = RevisionMenu.addMenu("Кисточка")
+        self.eraserButton = QtWidgets.QPushButton(self.widget)
 
-        # Редакция --> Кисточка --> Размеры кисточки
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.eraserButton.sizePolicy().hasHeightForWidth())
 
-        BrashSizeMenu = BrashMenu.addMenu("Размер кисточки")
+        self.eraserButton.setSizePolicy(sizePolicy)
+        self.eraserButton.setMinimumSize(QtCore.QSize(30, 30))
+        self.eraserButton.setMaximumSize(QtCore.QSize(30, 30))
+        self.eraserButton.setText("")
 
-        thereepxAction = QAction("3px", self)
-        thereepxAction.setShortcut("Ctrl+T")
-        BrashSizeMenu.addAction(thereepxAction)
-        thereepxAction.triggered.connect(self.threePx)
+        Erasericon = QtGui.QIcon()
+        Erasericon.addPixmap(QtGui.QPixmap("icons/Ластик.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
 
-        fivepxAction = QAction("5px", self)
-        fivepxAction.setShortcut("Ctrl+F")
-        BrashSizeMenu.addAction(fivepxAction)
-        fivepxAction.triggered.connect(self.fivePx)
+        self.eraserButton.setIcon(Erasericon)
+        self.eraserButton.setCheckable(True)
+        self.eraserButton.setObjectName("Кнопка для ластика")
 
-        sevenpxAction = QAction("7px", self)
-        sevenpxAction.setShortcut("Ctrl+S")
-        BrashSizeMenu.addAction(sevenpxAction)
-        sevenpxAction.triggered.connect(self.sevenPx)
+        self.gridLayout.addWidget(self.eraserButton, 1, 0, 1, 1)
 
-        ninepxAction = QAction("9px", self)
-        ninepxAction.setShortcut("Ctrl+N")
-        BrashSizeMenu.addAction(ninepxAction)
-        ninepxAction.triggered.connect(self.ninePx)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
 
-        # Редакция --> Кисточка --> Цвет кисточки
+        self.brushButton = QtWidgets.QPushButton(self.widget)
 
-        BrashColorMenu = BrashMenu.addMenu("Цвет кисточки")
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.brushButton.sizePolicy().hasHeightForWidth())
 
-        BrashColorAction = QAction("Поменять цвет", self)
-        BrashColorAction.setShortcut("Ctrl+B")
-        BrashColorMenu.addAction(BrashColorAction)
-        BrashColorAction.triggered.connect(self.color)
+        self.brushButton.setSizePolicy(sizePolicy)
+        self.brushButton.setMinimumSize(QtCore.QSize(30, 30))
+        self.brushButton.setMaximumSize(QtCore.QSize(30, 30))
+        self.brushButton.setText("")
 
-        # Редакция --> Ластик
+        Brushicon = QtGui.QIcon()
+        Brushicon.addPixmap(QtGui.QPixmap("icons/Кисточка.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
 
-        EraserMenu = RevisionMenu.addMenu("Ластик")
+        self.brushButton.setIcon(Brushicon)
+        self.brushButton.setCheckable(True)
+        self.brushButton.setObjectName("Кнопка для кисточки")
 
-        # Размер ластика
+        self.gridLayout.addWidget(self.brushButton, 3, 1, 1, 1)
 
-        # -//- что и для кисточки
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
 
-        # Цвет ластика (по умолчанию должен стоять белый цвет)
+        self.fillButton = QtWidgets.QPushButton(self.widget)
 
-        # -//- что и для кисточки
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.fillButton.sizePolicy().hasHeightForWidth())
 
-        # Редакция --> Фигуры
+        self.fillButton.setSizePolicy(sizePolicy)
+        self.fillButton.setMinimumSize(QtCore.QSize(30, 30))
+        self.fillButton.setMaximumSize(QtCore.QSize(30, 30))
+        self.fillButton.setText("")
 
-        ShapesMenu = RevisionMenu.addMenu("Фигуры")
+        Fillicon = QtGui.QIcon()
+        Fillicon.addPixmap(QtGui.QPixmap("icons/Заливка.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
 
-        # Прямоугольник
+        self.fillButton.setIcon(Fillicon)
+        self.fillButton.setCheckable(True)
+        self.fillButton.setObjectName("Кнопка для заливки")
+        self.gridLayout.addWidget(self.fillButton, 1, 1, 1, 1)
 
-        RectangleAction = QAction("Прямоугольник", self)
-        # RectangleAction.setShortcut("Ctrl+B") !!!! Поменять комбинацию
-        ShapesMenu.addAction(RectangleAction)
-        RectangleAction.triggered.connect(self.color)  # !!!! Поменять функцию
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
 
-        # Треугольник
+        self.polygonButton = QtWidgets.QPushButton(self.widget)
+        self.polygonButton.setMinimumSize(QtCore.QSize(30, 30))
+        self.polygonButton.setMaximumSize(QtCore.QSize(30, 30))
+        self.polygonButton.setText("")
 
-        TriangleAction = QAction("Треугольник", self)
-        # TriangleAction.setShortcut("Ctrl+B") !!!! Поменять комбинацию
-        ShapesMenu.addAction(TriangleAction)
-        TriangleAction.triggered.connect(self.color)  # !!!! Поменять функцию
+        Polygonicon = QtGui.QIcon()
+        Polygonicon.addPixmap(QtGui.QPixmap("icons/Многоугольник.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
 
-        # Круг
+        self.polygonButton.setIcon(Polygonicon)
+        self.polygonButton.setCheckable(True)
+        self.polygonButton.setObjectName("Кнопка для многоугольника")
 
-        CircleleAction = QAction("Круг", self)
-        # CircleleAction.setShortcut("Ctrl+B") !!!! Поменять комбинацию
-        ShapesMenu.addAction(CircleleAction)
-        CircleleAction.triggered.connect(self.color)  # !!!! Поменять функцию
+        self.gridLayout.addWidget(self.polygonButton, 6, 1, 1, 1)
 
-        # Редакция --> Заливка
+        self.ellipseButton = QtWidgets.QPushButton(self.widget)
+        self.ellipseButton.setMinimumSize(QtCore.QSize(30, 30))
+        self.ellipseButton.setMaximumSize(QtCore.QSize(30, 30))
+        self.ellipseButton.setText("")
 
-        FillMenu = RevisionMenu.addMenu("Заливка")
+        Ellipseicon = QtGui.QIcon()
+        Ellipseicon.addPixmap(QtGui.QPixmap("icons/Эллипс.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
 
-        # Заливка
+        self.ellipseButton.setIcon(Ellipseicon)
+        self.ellipseButton.setCheckable(True)
+        self.ellipseButton.setObjectName("Кнопка для эллипса")
 
-        FillAction = QAction("Заливка", self)
-        # FillAction.setShortcut("Ctrl+B") !!!! Поменять комбинацию
-        FillMenu.addAction(FillAction)
-        FillAction.triggered.connect(self.color)  # !!!! Поменять функцию
+        self.gridLayout.addWidget(self.ellipseButton, 7, 0, 1, 1)
 
-        # Третия менюшка - Помощь
+        self.sprayButton = QtWidgets.QPushButton(self.widget)
 
-        HelpMenu = MainMenu.addMenu("Помощь")
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.sprayButton.sizePolicy().hasHeightForWidth())
 
-        # Помощь - Помощь
+        self.sprayButton.setSizePolicy(sizePolicy)
+        self.sprayButton.setMinimumSize(QtCore.QSize(30, 30))
+        self.sprayButton.setMaximumSize(QtCore.QSize(30, 30))
+        self.sprayButton.setText("")
 
-        HelpAction = QAction("Помощь", self)
-        # HelpAction.setShortcut("Ctrl+B") !!!! Поменять комбинацию
-        HelpMenu.addAction(HelpAction)
-        HelpAction.triggered.connect(self.color)  # !!!! Поменять функцию
+        Sprayicon = QtGui.QIcon()
+        Sprayicon.addPixmap(QtGui.QPixmap("icons/Баллончик.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.sprayButton.setIcon(Sprayicon)
+        self.sprayButton.setCheckable(True)
+        self.sprayButton.setFlat(False)
+        self.sprayButton.setObjectName("Кнопка для баллончика")
+        self.gridLayout.addWidget(self.sprayButton, 3, 0, 1, 1)
 
-    def mousePressEvent(self, event):
-        if event.button() == Qt.LeftButton:
-            self.drawing = True
-            self.lastPoint = event.pos()
+        self.verticalLayout_2.addWidget(self.widget)
 
-    def mouseMoveEvent(self, event):
-        if (event.buttons() & Qt.LeftButton) & self.drawing:
-            painter = QPainter(self.image)
-            painter.setPen(QPen(self.brushColor, self.brushSize, Qt.SolidLine, Qt.RoundCap, Qt.RoundJoin))
-            painter.drawLine(self.lastPoint, event.pos())
-            self.lastPoint = event.pos()
-            self.update()
+        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
 
-    def mouseReleaseEvent(self, event):
-        if event.button == Qt.LeftButton:
-            self.drawing = False
+        self.verticalLayout_2.addItem(spacerItem)
+        self.horizontalLayout.addLayout(self.verticalLayout_2)
+        self.canvas = QtWidgets.QLabel(self.centralWidget)
 
-    def paintEvent(self, event):
-        canvasPainter = QPainter(self)
-        canvasPainter.drawImage(self.rect(), self.image, self.image.rect())
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding,
+                                           QtWidgets.QSizePolicy.MinimumExpanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.canvas.sizePolicy().hasHeightForWidth())
 
-    def save(self):
-        filePath, _ = QFileDialog.getSaveFileName(self, "Save Image", "",
-                                                  "PNG(*.png);;JPEG(*.jpg *.jpeg);; ALL Files(*.*)")
-        if filePath == "":
-            return
-        self.image.save(filePath)
+        self.canvas.setSizePolicy(sizePolicy)
+        self.canvas.setText("")
+        self.canvas.setObjectName("Холст")
 
-    def clear(self):
-        self.image.fill(Qt.white)
-        self.update()
+        self.horizontalLayout.addWidget(self.canvas)
 
-    def threePx(self):
-        self.brushSize = 3
+        self.verticalLayout.addLayout(self.horizontalLayout)
 
-    def fivePx(self):
-        self.brushSize = 5
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_2.setSpacing(6)
+        self.horizontalLayout_2.setObjectName("Горизонтальное расположение 2")
 
-    def sevenPx(self):
-        self.brushSize = 7
+        self.widget_2 = QtWidgets.QWidget(self.centralWidget)
+        self.widget_2.setMinimumSize(QtCore.QSize(78, 50))
+        self.widget_2.setMaximumSize(QtCore.QSize(78, 50))
+        self.widget_2.setObjectName("Виджет 2")
+        # Сначала идет побочная, т.к. главная должна перекрывать её
 
-    def ninePx(self):
-        self.brushSize = 9
+        # Побочная кнопка цвета
+        self.SideButton = QtWidgets.QPushButton(self.widget_2)
+        self.SideButton.setGeometry(QtCore.QRect(30, 10, 40, 40))
+        self.SideButton.setMinimumSize(QtCore.QSize(40, 40))
+        self.SideButton.setMaximumSize(QtCore.QSize(40, 40))
+        self.SideButton.setText("")
+        self.SideButton.setObjectName("Побочная кнопка цвета")
 
-    def color(self):
-        color = QColorDialog.getColor()
-        if color.isValid():
-            self.brushColor = color
+        # Главная кнопка цвета
+        self.MainButton = QtWidgets.QPushButton(self.widget_2)
+        self.MainButton.setGeometry(QtCore.QRect(10, 0, 40, 40))
+        self.MainButton.setMinimumSize(QtCore.QSize(40, 40))
+        self.MainButton.setMaximumSize(QtCore.QSize(40, 40))
+        self.MainButton.setText("")
+        self.MainButton.setObjectName("Главная кнопка цвета")
 
+        self.horizontalLayout_2.addWidget(self.widget_2)
 
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    window = Window()
-    window.show()
-    app.exec()
+        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+
+        self.horizontalLayout_2.addItem(spacerItem1)
+
+        self.verticalLayout.addLayout(self.horizontalLayout_2)
+
+        Window.setCentralWidget(self.centralWidget)
+
+        # Меню бар
+
+        self.menuBar = QtWidgets.QMenuBar(Window)
+        self.menuBar.setGeometry(QtCore.QRect(0, 0, 549, 22))
+        self.menuBar.setObjectName("MENU BAR")
+
+        # Меню файла
+        self.menuFIle = QtWidgets.QMenu(self.menuBar)
+        self.menuFIle.setObjectName("Меню файла")
+
+        # Меню редакции
+        self.menuEdit = QtWidgets.QMenu(self.menuBar)
+        self.menuEdit.setObjectName("Меню редакции")
+
+        # Меню помощи
+        self.menuHelp = QtWidgets.QMenu(self.menuBar)
+        self.menuHelp.setObjectName("Меню Помощи")
+
+        Window.setMenuBar(self.menuBar)
+
+        self.actionCopy = QtWidgets.QAction(Window)
+        self.actionCopy.setObjectName("Копия")
+
+        self.actionClearImage = QtWidgets.QAction(Window)
+        self.actionClearImage.setObjectName("Очистка")
+
+        self.actionSaveImage = QtWidgets.QAction(Window)
+
+        Saveicon = QtGui.QIcon()
+        Saveicon.addPixmap(QtGui.QPixmap("icons/Сохранение.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+
+        self.actionSaveImage.setIcon(Saveicon)
+        self.actionSaveImage.setObjectName("Сохранение")
+
+        self.actionNewImage = QtWidgets.QAction(Window)
+
+        self.menuFIle.addAction(self.actionSaveImage)
+
+        self.menuEdit.addAction(self.actionCopy)
+        self.menuEdit.addSeparator()
+        self.menuEdit.addAction(self.actionClearImage)
+
+        self.menuHelp.addSeparator()
+
+        self.menuBar.addAction(self.menuFIle.menuAction())
+        self.menuBar.addAction(self.menuEdit.menuAction())
+        self.menuBar.addAction(self.menuHelp.menuAction())
+
+        TRANS = QtCore.QCoreApplication.translate
+
+        Window.setWindowTitle(TRANS("Window", "Pint-Point"))
+
+        self.menuFIle.setTitle(TRANS("Window", "Файл"))
+        self.menuEdit.setTitle(TRANS("Window", "Редактировать"))
+        self.menuHelp.setTitle(TRANS("Window", "Помощь"))
+        self.actionCopy.setText(TRANS("Window", "Скопировать"))
+        self.actionCopy.setShortcut(TRANS("Window", "Ctrl+C"))
+        self.actionClearImage.setText(TRANS("Window", "Очистить"))
+        self.actionSaveImage.setText(TRANS("Window", "Сохранить изображение как"))
+        QtCore.QMetaObject.connectSlotsByName(TRANS)

@@ -13,19 +13,19 @@ class Ui_MainWindow(object):
         self.centralWidget.setSizePolicy(SizePolicy)
         self.centralWidget.setObjectName("Центральный виджет")
 
-        self.verticalLayout = QtWidgets.QVBoxLayout(self.centralWidget)
-        self.verticalLayout.setContentsMargins(11, 11, 11, 11)
-        self.verticalLayout.setSpacing(6)
-        self.verticalLayout.setObjectName("Вертикальное расположение")
+        self.VerticalLayout = QtWidgets.QVBoxLayout(self.centralWidget)
+        self.VerticalLayout.setContentsMargins(11, 11, 11, 11)
+        self.VerticalLayout.setSpacing(6)
+        self.VerticalLayout.setObjectName("Вертикальное расположение")
 
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setSizeConstraint(QtWidgets.QLayout.SetDefaultConstraint)
         self.horizontalLayout.setSpacing(6)
         self.horizontalLayout.setObjectName("Горизонтальное расположение")
 
-        self.verticalLayout_2 = QtWidgets.QVBoxLayout()
-        self.verticalLayout_2.setSpacing(6)
-        self.verticalLayout_2.setObjectName("Вертикальное расположение 2")
+        self.VerticalLayout_2 = QtWidgets.QVBoxLayout()
+        self.VerticalLayout_2.setSpacing(6)
+        self.VerticalLayout_2.setObjectName("Вертикальное расположение 2")
 
         self.widget = QtWidgets.QWidget(self.centralWidget)
 
@@ -47,10 +47,10 @@ class Ui_MainWindow(object):
         self.rectButton.setMaximumSize(QtCore.QSize(30, 30))
         self.rectButton.setText("")
 
-        quadrilateralicon = QtGui.QIcon()
-        quadrilateralicon.addPixmap(QtGui.QPixmap("icons/четырёхугольник.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        QuadrilateralIcon = QtGui.QIcon()
+        QuadrilateralIcon.addPixmap(QtGui.QPixmap("icons/четырёхугольник.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
 
-        self.rectButton.setIcon(quadrilateralicon)
+        self.rectButton.setIcon(QuadrilateralIcon)
         self.rectButton.setCheckable(True)
         self.rectButton.setObjectName("Кнопка для четырёхугольника")
 
@@ -93,10 +93,10 @@ class Ui_MainWindow(object):
         self.brushButton.setMaximumSize(QtCore.QSize(30, 30))
         self.brushButton.setText("")
 
-        Brushicon = QtGui.QIcon()
-        Brushicon.addPixmap(QtGui.QPixmap("icons/Кисточка.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        BrushIcon = QtGui.QIcon()
+        BrushIcon.addPixmap(QtGui.QPixmap("icons/Кисточка.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
 
-        self.brushButton.setIcon(Brushicon)
+        self.brushButton.setIcon(BrushIcon)
         self.brushButton.setCheckable(True)
         self.brushButton.setObjectName("Кнопка для кисточки")
 
@@ -149,10 +149,10 @@ class Ui_MainWindow(object):
         self.ellipseButton.setMaximumSize(QtCore.QSize(30, 30))
         self.ellipseButton.setText("")
 
-        Ellipseicon = QtGui.QIcon()
-        Ellipseicon.addPixmap(QtGui.QPixmap("icons/Эллипс.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        EllipseIcon = QtGui.QIcon()
+        EllipseIcon.addPixmap(QtGui.QPixmap("icons/Эллипс.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
 
-        self.ellipseButton.setIcon(Ellipseicon)
+        self.ellipseButton.setIcon(EllipseIcon)
         self.ellipseButton.setCheckable(True)
         self.ellipseButton.setObjectName("Кнопка для эллипса")
 
@@ -170,20 +170,20 @@ class Ui_MainWindow(object):
         self.sprayButton.setMaximumSize(QtCore.QSize(30, 30))
         self.sprayButton.setText("")
 
-        Sprayicon = QtGui.QIcon()
-        Sprayicon.addPixmap(QtGui.QPixmap("icons/Баллончик.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.sprayButton.setIcon(Sprayicon)
+        SprayIcon = QtGui.QIcon()
+        SprayIcon.addPixmap(QtGui.QPixmap("icons/Баллончик.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.sprayButton.setIcon(SprayIcon)
         self.sprayButton.setCheckable(True)
         self.sprayButton.setFlat(False)
         self.sprayButton.setObjectName("Кнопка для баллончика")
         self.gridLayout.addWidget(self.sprayButton, 3, 0, 1, 1)
 
-        self.verticalLayout_2.addWidget(self.widget)
+        self.VerticalLayout_2.addWidget(self.widget)
 
         spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
 
-        self.verticalLayout_2.addItem(spacerItem)
-        self.horizontalLayout.addLayout(self.verticalLayout_2)
+        self.VerticalLayout_2.addItem(spacerItem)
+        self.horizontalLayout.addLayout(self.VerticalLayout_2)
         self.canvas = QtWidgets.QLabel(self.centralWidget)
 
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding,
@@ -198,7 +198,7 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout.addWidget(self.canvas)
 
-        self.verticalLayout.addLayout(self.horizontalLayout)
+        self.VerticalLayout.addLayout(self.horizontalLayout)
 
         self.widget_2 = QtWidgets.QWidget(self.centralWidget)
         self.widget_2.setMinimumSize(QtCore.QSize(78, 50))
@@ -222,13 +222,14 @@ class Ui_MainWindow(object):
         self.MainButton.setText("")
         self.MainButton.setObjectName("Главная кнопка цвета")
 
-        self.verticalLayout_2.addWidget(self.widget_2)
+        self.VerticalLayout_2.addWidget(self.widget_2)
 
-        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.VerticalLayout_2.addItem(
+            QtWidgets.QSpacerItem(40, 20,
+                                  QtWidgets.QSizePolicy.Expanding,
+                                  QtWidgets.QSizePolicy.Minimum))
 
-        self.verticalLayout_2.addItem(spacerItem1)
-
-        self.verticalLayout.addLayout(self.verticalLayout_2)
+        self.VerticalLayout.addLayout(self.VerticalLayout_2)
 
         Window.setCentralWidget(self.centralWidget)
 
@@ -260,10 +261,10 @@ class Ui_MainWindow(object):
 
         self.actionSaveImage = QtWidgets.QAction(Window)
 
-        Saveicon = QtGui.QIcon()
-        Saveicon.addPixmap(QtGui.QPixmap("icons/Сохранение.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        SaveIcon = QtGui.QIcon()
+        SaveIcon.addPixmap(QtGui.QPixmap("icons/Сохранение.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
 
-        self.actionSaveImage.setIcon(Saveicon)
+        self.actionSaveImage.setIcon(SaveIcon)
         self.actionSaveImage.setObjectName("Сохранение")
 
         self.actionNewImage = QtWidgets.QAction(Window)

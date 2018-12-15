@@ -5,7 +5,6 @@ class Ui_MainWindow(object):
     def UI_FOR_PROJECT(self, Window):
         self.centralWidget = QtWidgets.QWidget(Window)
 
-
         SizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Maximum)
         SizePolicy.setHorizontalStretch(0)
         SizePolicy.setVerticalStretch(0)
@@ -292,7 +291,7 @@ class Ui_MainWindow(object):
         self.actionCopy.setText(QtCore.QCoreApplication.translate("Window", "Скопировать"))
         self.actionCopy.setShortcut(QtCore.QCoreApplication.translate("Window", "Ctrl+C"))
         self.actionClearImage.setText(QtCore.QCoreApplication.translate("Window", "Очистить"))
-        self.actionClearImage.setShortcut(QtCore.QCoreApplication.translate("Window","Ctrl+D"))
+        self.actionClearImage.setShortcut(QtCore.QCoreApplication.translate("Window", "Ctrl+D"))
         self.actionSaveImage.setText(QtCore.QCoreApplication.translate("Window", "Сохранить изображение как"))
-        self.actionSaveImage.setShortcut(QtCore.QCoreApplication.translate("Window","Ctrl+S"))
+        self.actionSaveImage.setShortcut(QtCore.QCoreApplication.translate("Window", "Ctrl+S"))
         QtCore.QMetaObject.connectSlotsByName(Window)

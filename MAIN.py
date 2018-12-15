@@ -3,6 +3,7 @@ from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 import random
+from os import system
 
 
 # Скрипт окна
@@ -253,6 +254,10 @@ class Window_(object):
         self.menuEdit = QtWidgets.QMenu(self.menuBar)
         self.menuEdit.setObjectName("Меню редакции")
 
+        #Меню помощь
+        self.menuHelp = QtWidgets.QMenu(self.menuBar)
+        self.menuHelp.setObjectName("Меню помощь")
+
         Window.setMenuBar(self.menuBar)
 
         self.actionCopy = QtWidgets.QAction(Window)
@@ -260,6 +265,9 @@ class Window_(object):
 
         self.actionClearImage = QtWidgets.QAction(Window)
         self.actionClearImage.setObjectName("Очистка")
+
+        self.actionHelpToUse = QtWidgets.QAction(Window)
+        self.actionHelpToUse.setObjectName("Помощь")
 
         self.actionSaveImage = QtWidgets.QAction(Window)
 
@@ -274,11 +282,15 @@ class Window_(object):
         self.menuFIle.addAction(self.actionSaveImage)
 
         self.menuEdit.addAction(self.actionCopy)
+        self.menuHelp.addAction(self.actionHelpToUse)
         self.menuEdit.addSeparator()
         self.menuEdit.addAction(self.actionClearImage)
 
         self.menuBar.addAction(self.menuFIle.menuAction())
         self.menuBar.addAction(self.menuEdit.menuAction())
+        self.menuBar.addAction(self.menuHelp.menuAction())
+
+
 
         self.drawingToolbar = QtWidgets.QToolBar(Window)
         self.drawingToolbar.setIconSize(QtCore.QSize(16, 16))
@@ -287,10 +299,13 @@ class Window_(object):
         Window.setWindowTitle(QtCore.QCoreApplication.translate("Window", "Pint-Point"))
         self.menuFIle.setTitle(QtCore.QCoreApplication.translate("Window", "Файл"))
         self.menuEdit.setTitle(QtCore.QCoreApplication.translate("Window", "Редактировать"))
+        self.menuHelp.setTitle(QtCore.QCoreApplication.translate("Window", "Помощь"))
         self.actionCopy.setText(QtCore.QCoreApplication.translate("Window", "Скопировать"))
         self.actionCopy.setShortcut(QtCore.QCoreApplication.translate("Window", "Ctrl+C"))
         self.actionClearImage.setText(QtCore.QCoreApplication.translate("Window", "Очистить"))
         self.actionClearImage.setShortcut(QtCore.QCoreApplication.translate("Window", "Ctrl+D"))
+        self.actionHelpToUse.setText(QtCore.QCoreApplication.translate("Window", "Помощь"))
+        self.actionHelpToUse.setShortcut(QtCore.QCoreApplication.translate("Window", "Ctrl+W"))
         self.actionSaveImage.setText(QtCore.QCoreApplication.translate("Window", "Сохранить изображение как"))
         self.actionSaveImage.setShortcut(QtCore.QCoreApplication.translate("Window", "Ctrl+S"))
         QtCore.QMetaObject.connectSlotsByName(Window)
@@ -451,6 +466,10 @@ class Canvas(QLabel):
     def selectpoly_mouseMoveEvent(self, e):
         if not self.locked:
             self.generic_poly_mouseMoveEvent(e)
+
+    def selectpoly_mouseDoubleClickEvent(self, e):
+        self.current_pos = e.pos()
+        self.locked = True
 
     def selectpoly_mouseDoubleClickEvent(self, e):
         self.current_pos = e.pos()
@@ -774,6 +793,7 @@ class MainWindow(QMainWindow, Window_):
 
         # Меню опций
         self.actionNewImage.triggered.connect(self.canvas.initialize)
+        self.actionHelpToUse.triggered.connect(self.HELP)
         self.actionSaveImage.triggered.connect(self.SAVE)
         self.actionClearImage.triggered.connect(self.canvas.reset)
 
@@ -803,7 +823,10 @@ class MainWindow(QMainWindow, Window_):
     def Install_SideColor(self, e):
         self.canvas.Install_SideColor(e)
         self.SideButton.setStyleSheet('QPushButton { background-color: %s; }' % e)
+    # функция Помощи
 
+    def HELP(self):
+        system('start ПрочтиМеня.txt')
     # Функция копирования
 
     def COPY(self):

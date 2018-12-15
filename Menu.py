@@ -5,6 +5,7 @@ class Ui_MainWindow(object):
     def UI_FOR_PROJECT(self, Window):
         self.centralWidget = QtWidgets.QWidget(Window)
 
+
         SizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Maximum)
         SizePolicy.setHorizontalStretch(0)
         SizePolicy.setVerticalStretch(0)
@@ -200,10 +201,6 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addLayout(self.horizontalLayout)
 
-        self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_2.setSpacing(6)
-        self.horizontalLayout_2.setObjectName("Горизонтальное расположение 2")
-
         self.widget_2 = QtWidgets.QWidget(self.centralWidget)
         self.widget_2.setMinimumSize(QtCore.QSize(78, 50))
         self.widget_2.setMaximumSize(QtCore.QSize(78, 50))
@@ -226,13 +223,13 @@ class Ui_MainWindow(object):
         self.MainButton.setText("")
         self.MainButton.setObjectName("Главная кнопка цвета")
 
-        self.horizontalLayout_2.addWidget(self.widget_2)
+        self.verticalLayout_2.addWidget(self.widget_2)
 
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
 
-        self.horizontalLayout_2.addItem(spacerItem1)
+        self.verticalLayout_2.addItem(spacerItem1)
 
-        self.verticalLayout.addLayout(self.horizontalLayout_2)
+        self.verticalLayout.addLayout(self.verticalLayout_2)
 
         Window.setCentralWidget(self.centralWidget)
 
@@ -284,15 +281,19 @@ class Ui_MainWindow(object):
         self.menuBar.addAction(self.menuEdit.menuAction())
         self.menuBar.addAction(self.menuHelp.menuAction())
 
-        TRANS = QtCore.QCoreApplication.translate
+        self.drawingToolbar = QtWidgets.QToolBar(Window)
+        self.drawingToolbar.setIconSize(QtCore.QSize(16, 16))
+        Window.addToolBar(QtCore.Qt.TopToolBarArea, self.drawingToolbar)
 
-        Window.setWindowTitle(TRANS("Window", "Pint-Point"))
+        _translate = QtCore.QCoreApplication.translate
 
-        self.menuFIle.setTitle(TRANS("Window", "Файл"))
-        self.menuEdit.setTitle(TRANS("Window", "Редактировать"))
-        self.menuHelp.setTitle(TRANS("Window", "Помощь"))
-        self.actionCopy.setText(TRANS("Window", "Скопировать"))
-        self.actionCopy.setShortcut(TRANS("Window", "Ctrl+C"))
-        self.actionClearImage.setText(TRANS("Window", "Очистить"))
-        self.actionSaveImage.setText(TRANS("Window", "Сохранить изображение как"))
-        QtCore.QMetaObject.connectSlotsByName(TRANS)
+        Window.setWindowTitle(_translate("Window", "Pint-Point"))
+
+        self.menuFIle.setTitle(_translate("Window", "Файл"))
+        self.menuEdit.setTitle(_translate("Window", "Редактировать"))
+        self.menuHelp.setTitle(_translate("Window", "Помощь"))
+        self.actionCopy.setText(_translate("Window", "Скопировать"))
+        self.actionCopy.setShortcut(_translate("Window", "Ctrl+C"))
+        self.actionClearImage.setText(_translate("Window", "Очистить"))
+        self.actionSaveImage.setText(_translate("Window", "Сохранить изображение как"))
+        QtCore.QMetaObject.connectSlotsByName(Window)

@@ -285,15 +285,14 @@ class Ui_MainWindow(object):
         self.drawingToolbar.setIconSize(QtCore.QSize(16, 16))
         Window.addToolBar(QtCore.Qt.TopToolBarArea, self.drawingToolbar)
 
-        _translate = QtCore.QCoreApplication.translate
-
-        Window.setWindowTitle(_translate("Window", "Pint-Point"))
-
-        self.menuFIle.setTitle(_translate("Window", "Файл"))
-        self.menuEdit.setTitle(_translate("Window", "Редактировать"))
-        self.menuHelp.setTitle(_translate("Window", "Помощь"))
-        self.actionCopy.setText(_translate("Window", "Скопировать"))
-        self.actionCopy.setShortcut(_translate("Window", "Ctrl+C"))
-        self.actionClearImage.setText(_translate("Window", "Очистить"))
-        self.actionSaveImage.setText(_translate("Window", "Сохранить изображение как"))
+        Window.setWindowTitle(QtCore.QCoreApplication.translate("Window", "Pint-Point"))
+        self.menuFIle.setTitle(QtCore.QCoreApplication.translate("Window", "Файл"))
+        self.menuEdit.setTitle(QtCore.QCoreApplication.translate("Window", "Редактировать"))
+        self.menuHelp.setTitle(QtCore.QCoreApplication.translate("Window", "Помощь"))
+        self.actionCopy.setText(QtCore.QCoreApplication.translate("Window", "Скопировать"))
+        self.actionCopy.setShortcut(QtCore.QCoreApplication.translate("Window", "Ctrl+C"))
+        self.actionClearImage.setText(QtCore.QCoreApplication.translate("Window", "Очистить"))
+        self.actionClearImage.setShortcut(QtCore.QCoreApplication.translate("Window","Ctrl+D"))
+        self.actionSaveImage.setText(QtCore.QCoreApplication.translate("Window", "Сохранить изображение как"))
+        self.actionSaveImage.setShortcut(QtCore.QCoreApplication.translate("Window","Ctrl+S"))
         QtCore.QMetaObject.connectSlotsByName(Window)

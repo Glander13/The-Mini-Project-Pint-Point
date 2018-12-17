@@ -1,9 +1,12 @@
 # The-Mini-Project-Pint-Point
 English Language (with google.translate)
+
 [Equipment]
 
 icons folder for application
+
 main.py - the main file that launches the application
+
 ReadMe.txt - a file that contains all the necessary information
 
 [Instruction]
@@ -35,7 +38,7 @@ ReadMe.txt - a file that contains all the necessary information
 Pros:
 - Drawing (Geometric shapes, brush, spray (including changing the color and size))
 - Two colors
-- Stiralka
+- Washer
 - Fill
 - Ability to save image
 - Ability to clear the field with a picture
@@ -52,7 +55,9 @@ The Mini-Project Pint-Point (Аналог Paint)
 [Комплектация]
 
 папка icons с иконками для приложения
+
 main.py - главный файл, запускающий приложение
+
 ПрочтиМеня.txt - файл, который содержит всю необходимую информацию
 
 [Инструкция]

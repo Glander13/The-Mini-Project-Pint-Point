@@ -1,9 +1,64 @@
-﻿The Mini-Project Pint-Point (Аналог Paint)
+# The-Mini-Project-Pint-Point
+English Language (with google.translate)
+
+[Equipment]
+
+icons folder for application
+
+main.py - the main file that launches the application
+
+ReadMe.txt - a file that contains all the necessary information
+
+[Instruction]
+
+- To use the brush, left-click on the brush icon
+- To use the main (first) color, left-click on the field (the default color is black)
+- To use a side (second) color, right-click on the field (the default is white)
+- To change the color, left-click on the square in the lower left corner
+- To change the brush length, left-click on the slider
+
+- To use shapes, click on the corresponding icons.
+- For Rectangle or / and ellipse, mouse over
+- For a polygon, double-click to complete the shape
+- To change the color, click on the square in the lower left corner
+- To change the length of the brush, click on the slider
+
+- To use the fill, click on the appropriate button with the icon, select the area to fill, click on this area
+
+- To use the Eraser, click on the appropriate button with the icon and hold down the left mouse button to use it.
+
+- To use the Spray (Spray), click on the corresponding button with the icon and hold down the left mouse button to use it
+
+-Also you can:
+- Save the created file in the item File -> Save image as or with the help of the combination Ctrl + S
+- Clear the created file in the item Edit -> Clear or using the Ctrl + D combination
+
+[Self Assessment Project]
+Pros:
+- Drawing (Geometric shapes, brush, spray (including changing the color and size))
+- Two colors
+- Washer
+- Fill
+- Ability to save image
+- Ability to clear the field with a picture
+
+Disadvantages:
+- Problems with screen stretching (in the process of implementation)
+- You can not open any file (in the process of implementation)
+- You can not copy the last steps (as in paint) (in the process of implementation)
+
+Enjoy using Pint-Point.
+
+Russion Language
+
+The Mini-Project Pint-Point (Аналог Paint)
 
 [Комплектация]
 
 папка icons с иконками для приложения
+
 main.py - главный файл, запускающий приложение
+
 ПрочтиМеня.txt - файл, который содержит всю необходимую информацию
 
 [Инструкция]
@@ -27,10 +82,13 @@ main.py - главный файл, запускающий приложение
 - Для использования Баллончика(Распылителя) нажмите на соответствущию кнопку с иконкой и зажмите левой кнопкой мыши для её использования
 
 -Также вы можите:
+
 -- Сохранить созданный файл в пункте Файл --> Сохранить изображение как или с помощью комбинации Ctrl+S
+
 -- Очистить созданный файл в пункте Редактировать --> Очистить или с помощью комбинации Ctrl+D
 
 [Самостоятельная оценка проекта]
+
 Плюсы:
 - Рисование (Геометрический фигур, кисточкой, баллончиком(в том числе изменять цвет и размер))
 - Два цвета
@@ -38,6 +96,7 @@ main.py - главный файл, запускающий приложение
 - Заливка
 - Возможность сохранять изображение
 - Возможность Очищать поле с картинкой
+
 Недостатки:
 - Проблемы с растяжением экрана (в процессе реализации)
 - Нельзя открыть какой-либо файл (в процессе реализации)

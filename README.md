@@ -43,6 +43,7 @@ Pros:
 - Ability to save image
 - Ability to clear the field with a picture
 - Copy picture
+
 Disadvantages:
 - Problems with screen stretching (in progress)
 - You can not open any file (in progress)

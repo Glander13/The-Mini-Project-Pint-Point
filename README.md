@@ -31,7 +31,6 @@ ReadMe.txt - a file that contains all the necessary information
 
 -Also you can:
 - Save the created file in the item File -> Save image as or with the help of the combination Ctrl + S
-- Copy created file in Edit -> Copy or using Ctrl + C combination
 - Clear the created file in the item Edit -> Clear or using the Ctrl + D combination
 
 [Self Assessment Project]
@@ -42,15 +41,16 @@ Pros:
 - Fill
 - Ability to save image
 - Ability to clear the field with a picture
-- Copy picture
 
 Disadvantages:
-- Problems with screen stretching (in progress)
-- You can not open any file (in progress)
+- Problems with screen stretching (in the process of implementation)
+- You can not open any file (in the process of implementation)
+- You can not copy the last steps (as in paint) (in the process of implementation)
 
 Enjoy using Pint-Point.
 
 Russion Language
+
 The Mini-Project Pint-Point (Аналог Paint)
 
 [Комплектация]
@@ -85,8 +85,6 @@ main.py - главный файл, запускающий приложение
 
 -- Сохранить созданный файл в пункте Файл --> Сохранить изображение как или с помощью комбинации Ctrl+S
 
--- Скопировать созданный файл в пункте Редактировать --> Скопировать или с помощью комбинации Ctrl+C
-
 -- Очистить созданный файл в пункте Редактировать --> Очистить или с помощью комбинации Ctrl+D
 
 [Самостоятельная оценка проекта]
@@ -98,10 +96,10 @@ main.py - главный файл, запускающий приложение
 - Заливка
 - Возможность сохранять изображение
 - Возможность Очищать поле с картинкой
-- Копировать картинку
 
 Недостатки:
 - Проблемы с растяжением экрана (в процессе реализации)
 - Нельзя открыть какой-либо файл (в процессе реализации)
+- Нельзя копировать последние действие (как в paint) (в процессе реализации) 
 
 Приятного использования Pint-Point.

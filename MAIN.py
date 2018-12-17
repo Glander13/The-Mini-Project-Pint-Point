@@ -305,7 +305,7 @@ class Window_(object):
         self.actionClearImage.setText(QtCore.QCoreApplication.translate("Window", "Очистить"))
         self.actionClearImage.setShortcut(QtCore.QCoreApplication.translate("Window", "Ctrl+D"))
         self.actionHelpToUse.setText(QtCore.QCoreApplication.translate("Window", "Помощь"))
-        self.actionHelpToUse.setShortcut(QtCore.QCoreApplication.translate("Window", "Ctrl+W"))
+        self.actionHelpToUse.setShortcut(QtCore.QCoreApplication.translate("Window", "Ctrl+H"))
         self.actionSaveImage.setText(QtCore.QCoreApplication.translate("Window", "Сохранить изображение как"))
         self.actionSaveImage.setShortcut(QtCore.QCoreApplication.translate("Window", "Ctrl+S"))
         QtCore.QMetaObject.connectSlotsByName(Window)
@@ -602,7 +602,7 @@ class Canvas(QLabel):
                 xy.extend(get_points(have_seen, (x, y)))
 
         if to_fill:
-            # Теперь у нас есть точки для .
+            # Теперь у нас есть точки для заливки
             p = QPainter(self.pixmap())
             p.setPen(QPen(self.active_color))
             p.drawPoints(*[QPoint(*xy) for xy in to_fill])

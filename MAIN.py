@@ -1,9 +1,10 @@
-from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtGui import *
-from PyQt5.QtWidgets import *
-from PyQt5.QtCore import *
 import random
 from os import system
+
+from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
 
 
 # Скрипт окна
@@ -12,7 +13,8 @@ class Window_(object):
     def UI_FOR_PROJECT(self, Window):
         self.centralWidget = QtWidgets.QWidget(Window)
 
-        SizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Maximum)
+        SizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum,
+                                           QtWidgets.QSizePolicy.Maximum)
         SizePolicy.setHorizontalStretch(0)
         SizePolicy.setVerticalStretch(0)
         SizePolicy.setHeightForWidth(self.centralWidget.sizePolicy().hasHeightForWidth())
@@ -36,7 +38,8 @@ class Window_(object):
 
         self.Widget = QtWidgets.QWidget(self.centralWidget)
 
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Maximum)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum,
+                                           QtWidgets.QSizePolicy.Maximum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.Widget.sizePolicy().hasHeightForWidth())
@@ -55,7 +58,8 @@ class Window_(object):
         self.rectButton.setText("")
 
         QuadrilateralIcon = QtGui.QIcon()
-        QuadrilateralIcon.addPixmap(QtGui.QPixmap("icons/четырёхугольник.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        QuadrilateralIcon.addPixmap(QtGui.QPixmap("icons/четырёхугольник.png"),
+                                    QtGui.QIcon.Normal, QtGui.QIcon.Off)
 
         self.rectButton.setIcon(QuadrilateralIcon)
         self.rectButton.setCheckable(True)
@@ -76,7 +80,8 @@ class Window_(object):
         self.eraserButton.setText("")
 
         Erasericon = QtGui.QIcon()
-        Erasericon.addPixmap(QtGui.QPixmap("icons/Ластик.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        Erasericon.addPixmap(QtGui.QPixmap("icons/Ластик.png"), QtGui.QIcon.Normal,
+                             QtGui.QIcon.Off)
 
         self.eraserButton.setIcon(Erasericon)
         self.eraserButton.setCheckable(True)
@@ -84,13 +89,15 @@ class Window_(object):
 
         self.gridLayout.addWidget(self.eraserButton, 1, 0, 1, 1)
 
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.
+                                           QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
 
         self.brushButton = QtWidgets.QPushButton(self.Widget)
 
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed,
+                                           QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.brushButton.sizePolicy().hasHeightForWidth())
@@ -101,7 +108,8 @@ class Window_(object):
         self.brushButton.setText("")
 
         BrushIcon = QtGui.QIcon()
-        BrushIcon.addPixmap(QtGui.QPixmap("icons/Кисточка.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        BrushIcon.addPixmap(QtGui.QPixmap("icons/Кисточка.png"), QtGui.QIcon.Normal,
+                            QtGui.QIcon.Off)
 
         self.brushButton.setIcon(BrushIcon)
         self.brushButton.setCheckable(True)
@@ -109,13 +117,15 @@ class Window_(object):
 
         self.gridLayout.addWidget(self.brushButton, 3, 1, 1, 1)
 
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed,
+                                           QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
 
         self.fillButton = QtWidgets.QPushButton(self.Widget)
 
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed,
+                                           QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.fillButton.sizePolicy().hasHeightForWidth())
@@ -126,14 +136,16 @@ class Window_(object):
         self.fillButton.setText("")
 
         Fillicon = QtGui.QIcon()
-        Fillicon.addPixmap(QtGui.QPixmap("icons/Заливка.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        Fillicon.addPixmap(QtGui.QPixmap("icons/Заливка.png"), QtGui.QIcon.Normal,
+                           QtGui.QIcon.Off)
 
         self.fillButton.setIcon(Fillicon)
         self.fillButton.setCheckable(True)
         self.fillButton.setObjectName("Кнопка для заливки")
         self.gridLayout.addWidget(self.fillButton, 1, 1, 1, 1)
 
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed,
+                                           QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
 
@@ -143,7 +155,8 @@ class Window_(object):
         self.polygonButton.setText("")
 
         Polygonicon = QtGui.QIcon()
-        Polygonicon.addPixmap(QtGui.QPixmap("icons/Многоугольник.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        Polygonicon.addPixmap(QtGui.QPixmap("icons/Многоугольник.png"), QtGui.QIcon.Normal,
+                              QtGui.QIcon.Off)
 
         self.polygonButton.setIcon(Polygonicon)
         self.polygonButton.setCheckable(True)
@@ -157,7 +170,8 @@ class Window_(object):
         self.ellipseButton.setText("")
 
         EllipseIcon = QtGui.QIcon()
-        EllipseIcon.addPixmap(QtGui.QPixmap("icons/Эллипс.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        EllipseIcon.addPixmap(QtGui.QPixmap("icons/Эллипс.png"), QtGui.QIcon.Normal,
+                              QtGui.QIcon.Off)
 
         self.ellipseButton.setIcon(EllipseIcon)
         self.ellipseButton.setCheckable(True)
@@ -167,7 +181,8 @@ class Window_(object):
 
         self.sprayButton = QtWidgets.QPushButton(self.Widget)
 
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum,
+                                           QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.sprayButton.sizePolicy().hasHeightForWidth())
@@ -178,7 +193,8 @@ class Window_(object):
         self.sprayButton.setText("")
 
         SprayIcon = QtGui.QIcon()
-        SprayIcon.addPixmap(QtGui.QPixmap("icons/Баллончик.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        SprayIcon.addPixmap(QtGui.QPixmap("icons/Баллончик.png"), QtGui.QIcon.Normal,
+                            QtGui.QIcon.Off)
         self.sprayButton.setIcon(SprayIcon)
         self.sprayButton.setCheckable(True)
         self.sprayButton.setFlat(False)
@@ -187,7 +203,8 @@ class Window_(object):
 
         self.VerticalLayout_2.addWidget(self.Widget)
 
-        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum,
+                                           QtWidgets.QSizePolicy.Expanding)
 
         self.VerticalLayout_2.addItem(spacerItem)
         self.HorizontalLayout.addLayout(self.VerticalLayout_2)
@@ -254,14 +271,11 @@ class Window_(object):
         self.menuEdit = QtWidgets.QMenu(self.menuBar)
         self.menuEdit.setObjectName("Меню редакции")
 
-        #Меню помощь
+        # Меню помощь
         self.menuHelp = QtWidgets.QMenu(self.menuBar)
         self.menuHelp.setObjectName("Меню помощь")
 
         Window.setMenuBar(self.menuBar)
-
-        self.actionCopy = QtWidgets.QAction(Window)
-        self.actionCopy.setObjectName("Копия")
 
         self.actionClearImage = QtWidgets.QAction(Window)
         self.actionClearImage.setObjectName("Очистка")
@@ -272,7 +286,8 @@ class Window_(object):
         self.actionSaveImage = QtWidgets.QAction(Window)
 
         SaveIcon = QtGui.QIcon()
-        SaveIcon.addPixmap(QtGui.QPixmap("icons/Сохранение.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        SaveIcon.addPixmap(QtGui.QPixmap("icons/Сохранение.png"), QtGui.QIcon.Normal,
+                           QtGui.QIcon.Off)
 
         self.actionSaveImage.setIcon(SaveIcon)
         self.actionSaveImage.setObjectName("Сохранение")
@@ -281,7 +296,6 @@ class Window_(object):
 
         self.menuFIle.addAction(self.actionSaveImage)
 
-        self.menuEdit.addAction(self.actionCopy)
         self.menuHelp.addAction(self.actionHelpToUse)
         self.menuEdit.addSeparator()
         self.menuEdit.addAction(self.actionClearImage)
@@ -289,8 +303,6 @@ class Window_(object):
         self.menuBar.addAction(self.menuFIle.menuAction())
         self.menuBar.addAction(self.menuEdit.menuAction())
         self.menuBar.addAction(self.menuHelp.menuAction())
-
-
 
         self.drawingToolbar = QtWidgets.QToolBar(Window)
         self.drawingToolbar.setIconSize(QtCore.QSize(16, 16))
@@ -300,13 +312,12 @@ class Window_(object):
         self.menuFIle.setTitle(QtCore.QCoreApplication.translate("Window", "Файл"))
         self.menuEdit.setTitle(QtCore.QCoreApplication.translate("Window", "Редактировать"))
         self.menuHelp.setTitle(QtCore.QCoreApplication.translate("Window", "Помощь"))
-        self.actionCopy.setText(QtCore.QCoreApplication.translate("Window", "Скопировать"))
-        self.actionCopy.setShortcut(QtCore.QCoreApplication.translate("Window", "Ctrl+C"))
         self.actionClearImage.setText(QtCore.QCoreApplication.translate("Window", "Очистить"))
         self.actionClearImage.setShortcut(QtCore.QCoreApplication.translate("Window", "Ctrl+D"))
         self.actionHelpToUse.setText(QtCore.QCoreApplication.translate("Window", "Помощь"))
         self.actionHelpToUse.setShortcut(QtCore.QCoreApplication.translate("Window", "Ctrl+H"))
-        self.actionSaveImage.setText(QtCore.QCoreApplication.translate("Window", "Сохранить изображение как"))
+        self.actionSaveImage.setText(QtCore.QCoreApplication.translate(
+            "Window", "Сохранить изображение как"))
         self.actionSaveImage.setShortcut(QtCore.QCoreApplication.translate("Window", "Ctrl+S"))
         QtCore.QMetaObject.connectSlotsByName(Window)
 
@@ -319,12 +330,6 @@ MODES = [
     'rect', 'polygon',
     'ellipse'
 ]
-
-
-def build_font(config):
-    font = config['font']
-    font.setPointSize(config['fontsize'])
-    return font
 
 
 class Canvas(QLabel):
@@ -345,16 +350,16 @@ class Canvas(QLabel):
     active_color = None
     timer_event = None
 
-    def initialize(self):
+    def Initialize(self):
         if self.SideColor:
             self.background_color = QColor(self.SideColor)
         else:
             self.background_color = QColor(Qt.white)
         if self.SideColor:
-            self.eraser_color = QColor(self.SideColor)
+            self.Eraser_color = QColor(self.SideColor)
         else:
-            self.eraser_color = QColor(Qt.white)
-        self.eraser_color.setAlpha(100)
+            self.Eraser_color = QColor(Qt.white)
+        self.Eraser_color.setAlpha(100)
         self.reset()
 
     def reset(self):
@@ -370,11 +375,11 @@ class Canvas(QLabel):
     def Install_SideColor(self, hex):
         self.SideColor = QColor(hex)
 
-    def set_mode(self, mode):
+    def installation_mode(self, mode):
         # Очистить активную анимацию таймера
         self.timer_cleanup()
         # Сбросить зависящие от режима переменные
-        self.active_shape_fn = None
+        self.active_shape_function = None
         self.active_shape_args = ()
 
         self.origin_pos = None
@@ -382,7 +387,7 @@ class Canvas(QLabel):
         self.current_pos = None
         self.last_pos = None
 
-        self.history_pos = None
+        self.position_change_history = None
         self.last_history = []
 
         self.dash_offset = 0
@@ -391,7 +396,7 @@ class Canvas(QLabel):
         self.mode = mode
 
     def reset_mode(self):
-        self.set_mode(self.mode)
+        self.installation_mode(self.mode)
 
     def on_timer(self):
         if self.timer_event:
@@ -422,7 +427,8 @@ class Canvas(QLabel):
         if getattr(self, "%s_mouseDoubleClickEvent" % self.mode, None):
             return getattr(self, "%s_mouseDoubleClickEvent" % self.mode, None)(e)
 
-    # Общие события (общие для инструментов, похожих на кисть)
+    """ Общие события (общие для инструментов, похожих на кисть 
+    (т.е кисточка, ластик, баллончик(распылитель)))"""
 
     def generic_mousePressEvent(self, e):
         self.last_pos = e.pos()
@@ -443,7 +449,8 @@ class Canvas(QLabel):
     def brush_mouseMoveEvent(self, e):
         if self.last_pos:
             p = QPainter(self.pixmap())
-            p.setPen(QPen(self.active_color, self.config['size'] * 3, Qt.SolidLine, Qt.RoundCap, Qt.RoundJoin))
+            p.setPen(QPen(self.active_color, self.config['size'] * 3, Qt.SolidLine,
+                          Qt.RoundCap, Qt.RoundJoin))
             p.drawLine(self.last_pos, e.pos())
 
             self.last_pos = e.pos()
@@ -452,55 +459,10 @@ class Canvas(QLabel):
     def brush_mouseReleaseEvent(self, e):
         self.generic_mouseReleaseEvent(e)
 
-    # События многоугольника
-
-    def selectpoly_mousePressEvent(self, e):
-        if not self.locked or e.button == Qt.RightButton:
-            self.active_shape_fn = 'drawPolygon'
-            self.preview_pen = QPen(QColor(0xff, 0xff, 0xff), 1, Qt.DashLine)
-            self.generic_poly_mousePressEvent(e)
-
-    def selectpoly_timerEvent(self, final=False):
-        self.generic_poly_timerEvent(final)
-
-    def selectpoly_mouseMoveEvent(self, e):
-        if not self.locked:
-            self.generic_poly_mouseMoveEvent(e)
-
-    def selectpoly_mouseDoubleClickEvent(self, e):
-        self.current_pos = e.pos()
-        self.locked = True
-
-    def selectpoly_mouseDoubleClickEvent(self, e):
-        self.current_pos = e.pos()
-        self.locked = True
-
-    def selectpoly_copy(self):
-        self.timer_cleanup()
-
-        pixmap = self.pixmap().copy()
-        bitmap = QBitmap()
-        bitmap.clear()  # Начинается со случайными видимыми данными
-
-        p = QPainter(bitmap)
-        '''Создадим маску, где будет храниться выбранная пользователем 
-        область, остальное, удаленное с изображения, будет прозрачным.'''
-        userpoly = QPolygon(self.history_pos + [self.current_pos])
-        p.setPen(QPen(Qt.color1))
-        p.setBrush(QBrush(Qt.color1))  # Solid color, Qt.color1 == bit on.
-        p.drawPolygon(userpoly)
-        p.end()
-
-        # Установим созданную маску на изображение
-        pixmap.setMask(bitmap)
-
-        # Вычислим ограничивающий прямоугольник и вернём копию этого региона
-        return pixmap.copy(userpoly.boundingRect())
-
-    # Прямоугольник
+    # События четырехугольника
 
     def selectrect_mousePressEvent(self, e):
-        self.active_shape_fn = 'drawRect'
+        self.active_shape_function = 'drawRect'
         self.preview_pen = QPen(QColor(0xff, 0xff, 0xff), 1, Qt.DashLine)
         self.generic_shape_mousePressEvent(e)
 
@@ -515,10 +477,6 @@ class Canvas(QLabel):
         self.current_pos = e.pos()
         self.locked = True
 
-    def selectrect_copy(self):
-        self.timer_cleanup()
-        return self.pixmap().copy(QRect(self.origin_pos, self.current_pos))
-
     # Ластик
 
     def eraser_mousePressEvent(self, e):
@@ -527,7 +485,7 @@ class Canvas(QLabel):
     def eraser_mouseMoveEvent(self, e):
         if self.last_pos:
             p = QPainter(self.pixmap())
-            p.setPen(QPen(self.eraser_color, 30, Qt.SolidLine, Qt.RoundCap, Qt.RoundJoin))
+            p.setPen(QPen(self.Eraser_color, 30, Qt.SolidLine, Qt.RoundCap, Qt.RoundJoin))
             p.drawLine(self.last_pos, e.pos())
 
             self.last_pos = e.pos()
@@ -536,7 +494,7 @@ class Canvas(QLabel):
     def eraser_mouseReleaseEvent(self, e):
         self.generic_mouseReleaseEvent(e)
 
-    # Баллончик
+    # Баллончик (распылитель)
 
     def spray_mousePressEvent(self, e):
         self.generic_mousePressEvent(e)
@@ -546,9 +504,9 @@ class Canvas(QLabel):
             p = QPainter(self.pixmap())
             p.setPen(QPen(self.active_color, 1))
 
-            for n in range(self.config['size'] * 100):
-                xo = random.gauss(0, self.config['size'] * 5)
-                yo = random.gauss(0, self.config['size'] * 5)
+            for n in range(self.config['size'] * 100):  # Можно изменить умножатель(по умолчанию стоит 100)
+                xo = random.gauss(0, self.config['size'] * 5)  # чем он больше, тем "жирнее" будет рисовать
+                yo = random.gauss(0, self.config['size'] * 5)  # распылитель
                 p.drawPoint(e.x() + xo, e.y() + yo)
 
         self.update()
@@ -574,8 +532,9 @@ class Canvas(QLabel):
         i = (x + (y * w)) * 4
         target_color = s[i:i + 3]
 
-        ''' Конвертирование байтовой строки в 1 байт. True - 255, False - 0'''
-        s = b''.join(b'\xff' if s[n:n + 3] == target_color else b'\x00' for n in range(0, len(s), 4))
+        # Конвертирование байтовой строки в 1 байт. True - 255, False - 0
+        s = b''.join(b'\xff' if s[n:n + 3] == target_color else b'\x00' for n in range(
+            0, len(s), 4))
 
         def get_pixel(x, y):
             return s[x + (y * w)]
@@ -608,7 +567,7 @@ class Canvas(QLabel):
             p.drawPoints(*[QPoint(*xy) for xy in to_fill])
             self.update()
 
-    # Общие события для фигур (Многоугольник и др.)
+    # Общие события для фигур как многоугольник
 
     def generic_shape_mousePressEvent(self, e):
         self.origin_pos = e.pos()
@@ -622,13 +581,15 @@ class Canvas(QLabel):
         pen.setDashOffset(self.dash_offset)
         p.setPen(pen)
         if self.last_pos:
-            getattr(p, self.active_shape_fn)(QRect(self.origin_pos, self.last_pos), *self.active_shape_args)
+            getattr(p, self.active_shape_function)(QRect(
+                self.origin_pos, self.last_pos), *self.active_shape_args)
 
         if not final:
             self.dash_offset -= 1
             pen.setDashOffset(self.dash_offset)
             p.setPen(pen)
-            getattr(p, self.active_shape_fn)(QRect(self.origin_pos, self.current_pos), *self.active_shape_args)
+            getattr(p, self.active_shape_function)(QRect(
+                self.origin_pos, self.current_pos), *self.active_shape_args)
 
         self.update()
         self.last_pos = self.current_pos
@@ -638,70 +599,25 @@ class Canvas(QLabel):
 
     def generic_shape_mouseReleaseEvent(self, e):
         if self.last_pos:
-            # Clear up indicator.
+            # Индикатор очистки
             self.timer_cleanup()
 
             p = QPainter(self.pixmap())
-            p.setPen(QPen(self.MainColor, self.config['size'], Qt.SolidLine, Qt.SquareCap, Qt.MiterJoin))
+            p.setPen(QPen(self.MainColor, self.config['size'],
+                          Qt.SolidLine, Qt.SquareCap, Qt.MiterJoin))
 
             if self.config['fill']:
                 p.setBrush(QBrush(self.SideColor))
-            getattr(p, self.active_shape_fn)(QRect(self.origin_pos, e.pos()), *self.active_shape_args)
+            getattr(p, self.active_shape_function)(QRect(self.origin_pos, e.pos()),
+                                                   *self.active_shape_args)
             self.update()
 
-        self.reset_mode()
-
-    # Общие поли-события для фигур
-
-    def generic_poly_mousePressEvent(self, e):
-        if e.button() == Qt.LeftButton:
-            if self.history_pos:
-                self.history_pos.append(e.pos())
-            else:
-                self.history_pos = [e.pos()]
-                self.current_pos = e.pos()
-                self.timer_event = self.generic_poly_timerEvent
-
-        elif e.button() == Qt.RightButton and self.history_pos:
-            # Убираем, мы не рисуем
-            self.timer_cleanup()
-            self.reset_mode()
-
-    def generic_poly_timerEvent(self, final=False):
-        p = QPainter(self.pixmap())
-        p.setCompositionMode(QPainter.RasterOp_SourceXorDestination)
-        pen = self.preview_pen
-        pen.setDashOffset(self.dash_offset)
-        p.setPen(pen)
-        if self.last_history:
-            getattr(p, self.active_shape_fn)(*self.last_history)
-
-        if not final:
-            self.dash_offset -= 1
-            pen.setDashOffset(self.dash_offset)
-            p.setPen(pen)
-            getattr(p, self.active_shape_fn)(*self.history_pos + [self.current_pos])
-
-        self.update()
-        self.last_pos = self.current_pos
-        self.last_history = self.history_pos + [self.current_pos]
-
-    def generic_poly_mouseMoveEvent(self, e):
-        self.current_pos = e.pos()
-
-    def generic_poly_mouseDoubleClickEvent(self, e):
-        self.timer_cleanup()
-        p = QPainter(self.pixmap())
-        p.setPen(QPen(self.MainColor, self.config['size'], Qt.SolidLine, Qt.RoundCap, Qt.RoundJoin))
-
-        getattr(p, self.active_shape_fn)(*self.history_pos + [e.pos()])
-        self.update()
         self.reset_mode()
 
     # Четырехугольник
 
     def rect_mousePressEvent(self, e):
-        self.active_shape_fn = 'drawRect'
+        self.active_shape_function = 'drawRect'
         self.active_shape_args = ()
         self.preview_pen = QPen(QColor(0xff, 0xff, 0xff), 1, Qt.SolidLine)
         self.generic_shape_mousePressEvent(e)
@@ -717,16 +633,62 @@ class Canvas(QLabel):
 
     # Многоугольник
 
+    def Polygon_mousePressEvent(self, e):
+        if e.button() == Qt.LeftButton:
+            if self.position_change_history:
+                self.position_change_history.append(e.pos())
+            else:
+                self.position_change_history = [e.pos()]
+                self.current_pos = e.pos()
+                self.timer_event = self.Polygon_timerEvent
+
+        elif e.button() == Qt.RightButton and self.position_change_history:
+            # Убираем, мы не рисуем
+            self.timer_cleanup()
+            self.reset_mode()
+
+    def Polygon_timerEvent(self, final=False):
+        p = QPainter(self.pixmap())
+        p.setCompositionMode(QPainter.RasterOp_SourceXorDestination)
+        pen = self.preview_pen
+        pen.setDashOffset(self.dash_offset)
+        p.setPen(pen)
+        if self.last_history:
+            getattr(p, self.active_shape_function)(*self.last_history)
+
+        if not final:
+            self.dash_offset -= 1
+            pen.setDashOffset(self.dash_offset)
+            p.setPen(pen)
+            getattr(p, self.active_shape_function)(
+                *self.position_change_history + [self.current_pos])
+
+        self.update()
+        self.last_pos = self.current_pos
+        self.last_history = self.position_change_history + [self.current_pos]
+
+    def generic_poly_mouseMoveEvent(self, e):
+        self.current_pos = e.pos()
+
+    def generic_poly_mouseDoubleClickEvent(self, e):
+        self.timer_cleanup()
+        p = QPainter(self.pixmap())
+        p.setPen(QPen(self.MainColor, self.config['size'], Qt.SolidLine, Qt.RoundCap, Qt.RoundJoin))
+
+        getattr(p, self.active_shape_function)(*self.position_change_history + [e.pos()])
+        self.update()
+        self.reset_mode()
+
     def polygon_mousePressEvent(self, e):
-        self.active_shape_fn = 'drawPolygon'
+        self.active_shape_function = 'drawPolygon'
         self.preview_pen = QPen(QColor(0xff, 0xff, 0xff), 1, Qt.SolidLine)
-        self.generic_poly_mousePressEvent(e)
+        self.Polygon_mousePressEvent(e)
 
     def polygon_timerEvent(self, final=False):
-        self.generic_poly_timerEvent(final)
+        self.Polygon_timerEvent(final)
 
     def polygon_mouseMoveEvent(self, e):
-        self.generic_poly_mouseMoveEvent(e)
+        self.current_pos = e.pos()
 
     def polygon_mouseDoubleClickEvent(self, e):
         self.generic_poly_mouseDoubleClickEvent(e)
@@ -734,7 +696,7 @@ class Canvas(QLabel):
     # Эллипс
 
     def ellipse_mousePressEvent(self, e):
-        self.active_shape_fn = 'drawEllipse'
+        self.active_shape_function = 'drawEllipse'
         self.active_shape_args = ()
         self.preview_pen = QPen(QColor(0xff, 0xff, 0xff), 1, Qt.SolidLine)
         self.generic_shape_mousePressEvent(e)
@@ -759,7 +721,7 @@ class MainWindow(QMainWindow, Window_):
         # Заменим заполнитель холста из класса Window_
         self.HorizontalLayout.removeWidget(self.canvas)
         self.canvas = Canvas()
-        self.canvas.initialize()
+        self.canvas.Initialize()
         # Нам нужно включить отслеживание мыши, чтобы следовать за мышью без нажатия кнопки.
         self.canvas.setMouseTracking(True)
         # Включить фокус для захвата ключевых входов.
@@ -772,15 +734,12 @@ class MainWindow(QMainWindow, Window_):
 
         for mode in MODES:
             btn = getattr(self, '%sButton' % mode)
-            btn.pressed.connect(lambda mode=mode: self.canvas.set_mode(mode))
+            btn.pressed.connect(lambda mode=mode: self.canvas.installation_mode(mode))
             mode_group.addButton(btn)
 
         # Настроим кнопки выбора цвета.
         self.MainButton.pressed.connect(lambda: self.Choose_a_color(self.Install_MainColor))
         self.SideButton.pressed.connect(lambda: self.Choose_a_color(self.Install_SideColor))
-
-        # Настройка сигналов действий
-        self.actionCopy.triggered.connect(self.COPY)
 
         # Инициализировать анимацию таймера.
         self.timer = QTimer()
@@ -792,7 +751,7 @@ class MainWindow(QMainWindow, Window_):
         self.Install_SideColor('#ffffff')  # Второй цвет - Белый
 
         # Меню опций
-        self.actionNewImage.triggered.connect(self.canvas.initialize)
+        self.actionNewImage.triggered.connect(self.canvas.Initialize)
         self.actionHelpToUse.triggered.connect(self.HELP)
         self.actionSaveImage.triggered.connect(self.SAVE)
         self.actionClearImage.triggered.connect(self.canvas.reset)
@@ -823,23 +782,11 @@ class MainWindow(QMainWindow, Window_):
     def Install_SideColor(self, e):
         self.canvas.Install_SideColor(e)
         self.SideButton.setStyleSheet('QPushButton { background-color: %s; }' % e)
+
     # функция Помощи
 
     def HELP(self):
         system('start ПрочтиМеня.txt')
-    # Функция копирования
-
-    def COPY(self):
-        clipboard = QApplication.clipboard()
-
-        if self.canvas.mode == 'selectrect' and self.canvas.locked:
-            clipboard.setPixmap(self.canvas.selectrect_copy())
-
-        elif self.canvas.mode == 'selectpoly' and self.canvas.locked:
-            clipboard.setPixmap(self.canvas.selectpoly_copy())
-
-        else:
-            clipboard.setPixmap(self.canvas.pixmap())
 
     # Функция сохранения
 

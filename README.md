@@ -1,6 +1,12 @@
 # The-Mini-Project-Pint-Point
 English Language (with google.translate)
 
+The Mini-Project Pint-Point (analog Paint)
+
+Why was this project invented?
+
+This project was designed to test pyqt in creating an analogue of paint.
+
 [Equipment]
 
 icons folder for application
@@ -43,15 +49,19 @@ Pros:
 - Ability to clear the field with a picture
 
 Disadvantages:
-- Problems with screen stretching (in the process of implementation)
+- Problems with screen stretching (including not to increase or decrease the canvas) (in the process of implementation)
 - You can not open any file (in the process of implementation)
-- You can not copy the last steps (as in paint) (in the process of implementation)
+- You can not copy the last steps (and use the insert accordingly) (as in paint) (in the process of implementation)
 
 Enjoy using Pint-Point.
 
 Russion Language
 
 The Mini-Project Pint-Point (Аналог Paint)
+
+Зачем был придуман этот проект?
+
+Этот проект был придуман, чтобы опробовать pyqt в создании аналога paint.
 
 [Комплектация]
 
@@ -98,8 +108,8 @@ main.py - главный файл, запускающий приложение
 - Возможность Очищать поле с картинкой
 
 Недостатки:
-- Проблемы с растяжением экрана (в процессе реализации)
+- Проблемы с растяжением экрана (в том числе нельзя увеличивать или уменьшать холст)(в процессе реализации)
 - Нельзя открыть какой-либо файл (в процессе реализации)
-- Нельзя копировать последние действие (как в paint) (в процессе реализации) 
+- Нельзя копировать последние действие (и использовать вставку ́соответственно) (как в paint) (в процессе реализации) 
 
 Приятного использования Pint-Point.

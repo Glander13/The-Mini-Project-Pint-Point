@@ -7,7 +7,7 @@ from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 
 
-# Скрипт окна
+# Скрипт виджетов
 
 class Window_(object):
     def ui_for_project(self, Window):
@@ -346,18 +346,21 @@ class Window_(object):
         QtCore.QMetaObject.connectSlotsByName(Window)
 
 
-# Скрипт реализации
+# Скрипт холста
 
-MODES = [
+# Режимы
+
+regimes = [
     'eraser', 'fill',
     'brush', 'spray',
     'rect', 'polygon',
     'ellipse'
 ]
 
+# Класс холста
 
 class Canvas(QLabel):
-    mode = 'rectangle'
+    regime = 'rectangle'
 
     MainColor = QColor(Qt.black)  # Основной цвет
     SideColor = None  # Второй цвет
@@ -393,13 +396,19 @@ class Canvas(QLabel):
         # Очистим холст
         self.pixmap().fill(self.background_color)
 
+    # Установка главного цвета
+
     def install_maincolor(self, e):
         self.MainColor = QColor(e)
+
+    # Установка второго цвета
 
     def install_sidecolor(self, hex):
         self.SideColor = QColor(hex)
 
-    def installation_mode(self, mode):
+    # Установка режима по умолчанию
+
+    def installation_mode(self, regime):
         # Очистить активную анимацию таймера
         self.timer_cleanup()
         # Сбросить зависящие от режима переменные
@@ -417,51 +426,57 @@ class Canvas(QLabel):
         self.dash_offset = 0
         self.locked = False
         # Применить режим
-        self.mode = mode
+        self.regime = regime
+
+    # Функция сброса
 
     def reset_mode(self):
-        self.installation_mode(self.mode)
+        self.installation_mode(self.regime)
 
-    def on_timer(self):
+    # Функция включения таймера (т.к. все действия временные)
+
+    def timer_on(self):
         if self.timer_event:
             self.timer_event()
 
+    # Очистим таймер нового действия
+
     def timer_cleanup(self):
         if self.timer_event:
-            # Остановите таймер, затем запустите очистку.
+            # Остановим таймер, затем запустите очистку.
             timer_event = self.timer_event
             self.timer_event = None
             timer_event(final=True)
 
     # События мыши.
 
-    def mousePressEvent(self, e):
-        if getattr(self, "%s_mousePressEvent" % self.mode, None):
-            return getattr(self, "%s_mousePressEvent" % self.mode,
-                           None)(e)
+    def mousePressEvent(self, mouse):
+        if getattr(self, "%s_mousePressEvent" % self.regime, None):
+            return getattr(self, "%s_mousePressEvent" % self.regime,
+                           None)(mouse)
 
-    def mouseMoveEvent(self, e):
-        if getattr(self, "%s_mouseMoveEvent" % self.mode, None):
-            return getattr(self, "%s_mouseMoveEvent" % self.mode,
-                           None)(e)
+    def mouseMoveEvent(self, mouse):
+        if getattr(self, "%s_mouseMoveEvent" % self.regime, None):
+            return getattr(self, "%s_mouseMoveEvent" % self.regime,
+                           None)(mouse)
 
-    def mouseReleaseEvent(self, e):
-        if getattr(self, "%s_mouseReleaseEvent" % self.mode, None):
-            return getattr(self, "%s_mouseReleaseEvent" % self.mode,
-                           None)(e)
+    def mouseReleaseEvent(self, mouse):
+        if getattr(self, "%s_mouseReleaseEvent" % self.regime, None):
+            return getattr(self, "%s_mouseReleaseEvent" % self.regime,
+                           None)(mouse)
 
-    def mouseDoubleClickEvent(self, e):
-        if getattr(self, "%s_mouseDoubleClickEvent" % self.mode, None):
-            return getattr(self, "%s_mouseDoubleClickEvent" % self.mode,
-                           None)(e)
+    def mouseDoubleClickEvent(self, mouse):
+        if getattr(self, "%s_mouseDoubleClickEvent" % self.regime, None):
+            return getattr(self, "%s_mouseDoubleClickEvent" % self.regime,
+                           None)(mouse)
 
     """ Общие события (общие для инструментов, похожих на кисть 
     (т.е кисточка, ластик, баллончик(распылитель)))"""
 
-    def generic_mousePressEvent(self, e):
-        self.last_pos = e.pos()
+    def generic_mousePressEvent(self, mouse):
+        self.last_pos = mouse.pos()
 
-        if e.button() == Qt.LeftButton:
+        if mouse.button() == Qt.LeftButton:
             self.active_color = self.MainColor
         else:
             self.active_color = self.SideColor
@@ -469,7 +484,7 @@ class Canvas(QLabel):
     def generic_mouseReleaseEvent(self, e):
         self.last_pos = None
 
-        # Кисточка
+    # Кисточка
 
     def brush_mousePressEvent(self, e):
         self.generic_mousePressEvent(e)
@@ -505,7 +520,7 @@ class Canvas(QLabel):
         self.current_position = e.pos()
         self.locked = True
 
-    # Ластик
+    # События ластика
 
     def eraser_mousePressEvent(self, e):
         self.generic_mousePressEvent(e)
@@ -523,7 +538,7 @@ class Canvas(QLabel):
     def eraser_mouseReleaseEvent(self, e):
         self.generic_mouseReleaseEvent(e)
 
-    # Баллончик (распылитель)
+    # События баллончика (распылителя)
 
     def spray_mousePressEvent(self, e):
         self.generic_mousePressEvent(e)
@@ -543,7 +558,7 @@ class Canvas(QLabel):
     def spray_mouseReleaseEvent(self, e):
         self.generic_mouseReleaseEvent(e)
 
-    # Заливка
+    # Событие заливки
 
     def fill_mousePressEvent(self, e):
 
@@ -596,7 +611,7 @@ class Canvas(QLabel):
             p.drawPoints(*[QPoint(*xy) for xy in to_fill])
             self.update()
 
-    # Общие события для фигур как многоугольник
+    # Общие события для фигур как многоугольник (Четырехугольник, многоугольник, эллипс)
 
     def generic_shape_mousePressEvent(self, e):
         self.origin_pos = e.pos()
@@ -742,6 +757,9 @@ class Canvas(QLabel):
         self.generic_shape_mouseReleaseEvent(e)
 
 
+# Главный собирающий класс включающий в себя классы canvas и window_,
+# а также реализирующий их
+
 class MainWindow(QMainWindow, Window_):
 
     def __init__(self, *args, **kwargs):
@@ -761,14 +779,14 @@ class MainWindow(QMainWindow, Window_):
         self.HorizontalLayout.addWidget(self.canvas)
 
         # Настроим кнопки режима
-        mode_group = QButtonGroup(self)
-        mode_group.setExclusive(True)
+        regime_group = QButtonGroup(self)
+        regime_group.setExclusive(True)
 
-        for mode in MODES:
-            btn = getattr(self, '%sButton' % mode)
+        for regime in regimes:
+            btn = getattr(self, '%sButton' % regime)
             btn.pressed.connect(
-                lambda mode=mode: self.canvas.installation_mode(mode))
-            mode_group.addButton(btn)
+                lambda regime=regime: self.canvas.installation_mode(regime))
+            regime_group.addButton(btn)
 
         # Настроим кнопки выбора цвета.
         self.MainButton.pressed.connect(
@@ -776,20 +794,26 @@ class MainWindow(QMainWindow, Window_):
         self.SideButton.pressed.connect(
             lambda: self.Choose_a_color(self.install_sidecolor))
 
-        # Инициализировать анимацию таймера.
+        #  Инициализируем таймер
+
         self.timer = QTimer()
-        self.timer.timeout.connect(self.canvas.on_timer)
+        self.timer.timeout.connect(self.canvas.timer_on)
         self.timer.setInterval(100)
         self.timer.start()
+
+        # Установим цвета по умолчанию
 
         self.install_maincolor('#000000')  # Основной цвет - Черный
         self.install_sidecolor('#ffffff')  # Второй цвет - Белый
 
         # Меню опций
+
         self.actionNewImage.triggered.connect(self.canvas.initialize)
         self.actionHelpToUse.triggered.connect(self.help)
         self.actionSaveImage.triggered.connect(self.save)
         self.actionClearImage.triggered.connect(self.canvas.reset)
+
+        # Размер для кисточки, контура фигур, ластика и баллончика (расспылителя)
 
         self.sizeselect = QSlider()
         self.sizeselect.setRange(1, 20)

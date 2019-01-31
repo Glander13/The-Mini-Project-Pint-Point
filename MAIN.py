@@ -1,16 +1,25 @@
 import random
-import os, shutil
+import os
 from PIL import Image
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
+from os import system
+
+"""
+Скрипт оформления окна (виджетов) 
+(Конвератация .ui файла из QtDesigner через pyuic5 
++ некоторые моменты в ручную)
+Некоторые сведения:
+размер окна: 700 на 475
+размер кнопок (режимов): 30 на 30
+размер холста: 600 на 400
+"""
 
 
-# Скрипт виджетов
 
-class Window_(object):
+class UI_Window(object):
     def ui_for_project(self, Window):
         self.centralWidget = QtWidgets.QWidget(Window)
 
@@ -22,22 +31,18 @@ class Window_(object):
             self.centralWidget.sizePolicy().hasHeightForWidth())
 
         self.centralWidget.setSizePolicy(SizePolicy)
-        self.centralWidget.setObjectName("Центральный виджет")
 
         self.VerticalLayout = QtWidgets.QVBoxLayout(self.centralWidget)
         self.VerticalLayout.setContentsMargins(11, 11, 11, 11)
         self.VerticalLayout.setSpacing(6)
-        self.VerticalLayout.setObjectName("Вертикальное расположение")
 
         self.HorizontalLayout = QtWidgets.QHBoxLayout()
         self.HorizontalLayout.setSizeConstraint(
             QtWidgets.QLayout.SetDefaultConstraint)
         self.HorizontalLayout.setSpacing(6)
-        self.HorizontalLayout.setObjectName("Горизонтальное расположение")
 
         self.VerticalLayout_2 = QtWidgets.QVBoxLayout()
         self.VerticalLayout_2.setSpacing(6)
-        self.VerticalLayout_2.setObjectName("Вертикальное расположение 2")
 
         self.Widget = QtWidgets.QWidget(self.centralWidget)
 
@@ -49,117 +54,114 @@ class Window_(object):
             self.Widget.sizePolicy().hasHeightForWidth())
 
         self.Widget.setSizePolicy(sizePolicy)
-        self.Widget.setObjectName("Виджет")
 
         self.gridLayout = QtWidgets.QGridLayout(self.Widget)
         self.gridLayout.setContentsMargins(11, 11, 11, 11)
-        self.gridLayout.setSpacing(15)
-        self.gridLayout.setObjectName("Макет сетки")
-
-        self.rectButton = QtWidgets.QPushButton(self.Widget)
-        self.rectButton.setMinimumSize(QtCore.QSize(30, 30))
-        self.rectButton.setMaximumSize(QtCore.QSize(30, 30))
-        self.rectButton.setText("")
-
-        QuadrilateralIcon = QtGui.QIcon()
-        QuadrilateralIcon.addPixmap(QtGui.QPixmap(
-            "icons/четырёхугольник.png"),
-            QtGui.QIcon.Normal, QtGui.QIcon.Off)
-
-        self.rectButton.setIcon(QuadrilateralIcon)
-        self.rectButton.setCheckable(True)
-        self.rectButton.setObjectName("Кнопка для четырёхугольника")
-
-        self.gridLayout.addWidget(self.rectButton, 6, 0, 1, 1)
-
-        self.eraserButton = QtWidgets.QPushButton(self.Widget)
-
-        sizePolicy = QtWidgets.QSizePolicy(
-            QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(
-            self.eraserButton.sizePolicy().hasHeightForWidth())
-
-        self.eraserButton.setSizePolicy(sizePolicy)
-        self.eraserButton.setMinimumSize(QtCore.QSize(30, 30))
-        self.eraserButton.setMaximumSize(QtCore.QSize(30, 30))
-        self.eraserButton.setText("")
-
-        Erasericon = QtGui.QIcon()
-        Erasericon.addPixmap(QtGui.QPixmap("icons/Ластик.png"),
-                             QtGui.QIcon.Normal,
-                             QtGui.QIcon.Off)
-
-        self.eraserButton.setIcon(Erasericon)
-        self.eraserButton.setCheckable(True)
-        self.eraserButton.setObjectName("Кнопка для ластика")
-
-        self.gridLayout.addWidget(self.eraserButton, 1, 0, 1, 1)
-
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.
-                                           QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-
+        self.gridLayout.setSpacing(7)
+        # Кисточка
         self.brushButton = QtWidgets.QPushButton(self.Widget)
-
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed,
                                            QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(
             self.brushButton.sizePolicy().hasHeightForWidth())
-
         self.brushButton.setSizePolicy(sizePolicy)
         self.brushButton.setMinimumSize(QtCore.QSize(30, 30))
         self.brushButton.setMaximumSize(QtCore.QSize(30, 30))
         self.brushButton.setText("")
-
         BrushIcon = QtGui.QIcon()
         BrushIcon.addPixmap(QtGui.QPixmap("icons/Кисточка.png"),
                             QtGui.QIcon.Normal,
                             QtGui.QIcon.Off)
-
         self.brushButton.setIcon(BrushIcon)
         self.brushButton.setCheckable(True)
-        self.brushButton.setObjectName("Кнопка для кисточки")
-
-        self.gridLayout.addWidget(self.brushButton, 3, 1, 1, 1)
-
+        self.gridLayout.addWidget(self.brushButton, 1, 0, 1, 1)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed,
                                            QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
+        # Ластик
+        self.eraserButton = QtWidgets.QPushButton(self.Widget)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(
+            self.eraserButton.sizePolicy().hasHeightForWidth())
+        self.eraserButton.setSizePolicy(sizePolicy)
+        self.eraserButton.setMinimumSize(QtCore.QSize(30, 30))
+        self.eraserButton.setMaximumSize(QtCore.QSize(30, 30))
+        self.eraserButton.setText("")
+        Erasericon = QtGui.QIcon()
+        Erasericon.addPixmap(QtGui.QPixmap("icons/Ластик.png"),
+                             QtGui.QIcon.Normal,
+                             QtGui.QIcon.Off)
+        self.eraserButton.setIcon(Erasericon)
+        self.eraserButton.setCheckable(True)
 
+        self.gridLayout.addWidget(self.eraserButton, 1, 1, 1, 1)
+        # Распылитель
+        self.sprayButton = QtWidgets.QPushButton(self.Widget)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum,
+                                           QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(
+            self.sprayButton.sizePolicy().hasHeightForWidth())
+        self.sprayButton.setSizePolicy(sizePolicy)
+        self.sprayButton.setMinimumSize(QtCore.QSize(30, 30))
+        self.sprayButton.setMaximumSize(QtCore.QSize(30, 30))
+        self.sprayButton.setText("")
+        SprayIcon = QtGui.QIcon()
+        SprayIcon.addPixmap(QtGui.QPixmap("icons/Баллончик.png"),
+                            QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.sprayButton.setIcon(SprayIcon)
+        self.sprayButton.setCheckable(True)
+        self.sprayButton.setFlat(False)
+        self.gridLayout.addWidget(self.sprayButton, 2, 0, 1, 1)
+        # Заливка
         self.fillButton = QtWidgets.QPushButton(self.Widget)
-
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed,
                                            QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(
             self.fillButton.sizePolicy().hasHeightForWidth())
-
         self.fillButton.setSizePolicy(sizePolicy)
         self.fillButton.setMinimumSize(QtCore.QSize(30, 30))
         self.fillButton.setMaximumSize(QtCore.QSize(30, 30))
         self.fillButton.setText("")
-
         Fillicon = QtGui.QIcon()
-        Fillicon.addPixmap(QtGui.QPixmap("icons/Заливка.png"), QtGui.QIcon.Normal,
+        Fillicon.addPixmap(QtGui.QPixmap("icons/Заливка.png"),
+                           QtGui.QIcon.Normal,
                            QtGui.QIcon.Off)
-
         self.fillButton.setIcon(Fillicon)
         self.fillButton.setCheckable(True)
-        self.fillButton.setObjectName("Кнопка для заливки")
-        self.gridLayout.addWidget(self.fillButton, 1, 1, 1, 1)
-
+        self.gridLayout.addWidget(self.fillButton, 2, 1, 1, 1)
+        # Четырехугольник
+        self.rectButton = QtWidgets.QPushButton(self.Widget)
+        self.rectButton.setMinimumSize(QtCore.QSize(30, 30))
+        self.rectButton.setMaximumSize(QtCore.QSize(30, 30))
+        self.rectButton.setText("")
+        QuadrilateralIcon = QtGui.QIcon()
+        QuadrilateralIcon.addPixmap(QtGui.QPixmap(
+            "icons/четырёхугольник.png"),
+            QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.rectButton.setIcon(QuadrilateralIcon)
+        self.rectButton.setCheckable(True)
+        self.gridLayout.addWidget(
+            self.rectButton, 3, 0, 1, 1)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Fixed,
+            QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed,
                                            QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-
+        # Многоугольник
         self.polygonButton = QtWidgets.QPushButton(self.Widget)
         self.polygonButton.setMinimumSize(QtCore.QSize(30, 30))
         self.polygonButton.setMaximumSize(QtCore.QSize(30, 30))
@@ -172,68 +174,37 @@ class Window_(object):
 
         self.polygonButton.setIcon(Polygonicon)
         self.polygonButton.setCheckable(True)
-        self.polygonButton.setObjectName("Кнопка для многоугольника")
-
-        self.gridLayout.addWidget(self.polygonButton, 6, 1, 1, 1)
-
+        self.gridLayout.addWidget(self.polygonButton, 3, 1, 1, 1)
+        # Эллипс
         self.ellipseButton = QtWidgets.QPushButton(self.Widget)
         self.ellipseButton.setMinimumSize(QtCore.QSize(30, 30))
         self.ellipseButton.setMaximumSize(QtCore.QSize(30, 30))
         self.ellipseButton.setText("")
-
         EllipseIcon = QtGui.QIcon()
         EllipseIcon.addPixmap(QtGui.QPixmap("icons/Эллипс.png"),
                               QtGui.QIcon.Normal,
                               QtGui.QIcon.Off)
-
         self.ellipseButton.setIcon(EllipseIcon)
         self.ellipseButton.setCheckable(True)
-        self.ellipseButton.setObjectName("Кнопка для эллипса")
-
-        self.gridLayout.addWidget(self.ellipseButton, 7, 0, 1, 1)
-
-        self.sprayButton = QtWidgets.QPushButton(self.Widget)
-
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum,
-                                           QtWidgets.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(
-            self.sprayButton.sizePolicy().hasHeightForWidth())
-
-        self.sprayButton.setSizePolicy(sizePolicy)
-        self.sprayButton.setMinimumSize(QtCore.QSize(30, 30))
-        self.sprayButton.setMaximumSize(QtCore.QSize(30, 30))
-        self.sprayButton.setText("")
-
-        SprayIcon = QtGui.QIcon()
-        SprayIcon.addPixmap(QtGui.QPixmap("icons/Баллончик.png"),
-                            QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.sprayButton.setIcon(SprayIcon)
-        self.sprayButton.setCheckable(True)
-        self.sprayButton.setFlat(False)
-        self.sprayButton.setObjectName("Кнопка для баллончика")
-        self.gridLayout.addWidget(self.sprayButton, 3, 0, 1, 1)
+        self.gridLayout.addWidget(self.ellipseButton, 4, 0, 1, 1)
 
         self.VerticalLayout_2.addWidget(self.Widget)
-
-        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum,
+        spacerItem = QtWidgets.QSpacerItem(20, 40,
+                                           QtWidgets.QSizePolicy.Minimum,
                                            QtWidgets.QSizePolicy.Expanding)
-
         self.VerticalLayout_2.addItem(spacerItem)
         self.HorizontalLayout.addLayout(self.VerticalLayout_2)
+        # Холст
         self.canvas = QtWidgets.QLabel(self.centralWidget)
-
         sizePolicy = QtWidgets.QSizePolicy(
             QtWidgets.QSizePolicy.MinimumExpanding,
             QtWidgets.QSizePolicy.MinimumExpanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.canvas.sizePolicy().hasHeightForWidth())
-
+        sizePolicy.setHeightForWidth(
+            self.canvas.sizePolicy().hasHeightForWidth())
         self.canvas.setSizePolicy(sizePolicy)
         self.canvas.setText("")
-        self.canvas.setObjectName("Холст")
 
         self.HorizontalLayout.addWidget(self.canvas)
 
@@ -242,9 +213,12 @@ class Window_(object):
         self.Widget_2 = QtWidgets.QWidget(self.centralWidget)
         self.Widget_2.setMinimumSize(QtCore.QSize(78, 50))
         self.Widget_2.setMaximumSize(QtCore.QSize(78, 50))
-        self.Widget_2.setObjectName("Виджет 2")
-        # Сначала идет побочная, т.к. главная должна перекрывать её
 
+        """
+        Кнопки для выбора цвета
+        Сначала идет побочная, т.к. главная должна перекрывать её
+        Побочная кнопка цвета
+        """
         # Побочная кнопка цвета
         self.SideButton = QtWidgets.QPushButton(self.Widget_2)
         self.SideButton.setGeometry(QtCore.QRect(30, 10, 40, 40))
@@ -272,7 +246,7 @@ class Window_(object):
 
         Window.setCentralWidget(self.centralWidget)
 
-        # Меню бар
+        # MenuBar
 
         self.menuBar = QtWidgets.QMenuBar(Window)
         self.menuBar.setGeometry(QtCore.QRect(0, 0, 549, 22))
@@ -301,6 +275,8 @@ class Window_(object):
         self.actionHelpToUse = QtWidgets.QAction(Window)
         self.actionHelpToUse.setObjectName("Помощь")
 
+        self.actionOpenImage = QtWidgets.QAction(Window)
+
         self.actionSaveImage = QtWidgets.QAction(Window)
 
         SaveIcon = QtGui.QIcon()
@@ -312,7 +288,7 @@ class Window_(object):
         self.actionSaveImage.setObjectName("Сохранение")
 
         self.actionNewImage = QtWidgets.QAction(Window)
-
+        self.menuFIle.addAction(self.actionOpenImage)
         self.menuFIle.addAction(self.actionSaveImage)
         self.menuFIle.addAction(self.actioneBackStep)
 
@@ -327,44 +303,37 @@ class Window_(object):
         self.drawingToolbar = QtWidgets.QToolBar(Window)
         self.drawingToolbar.setIconSize(QtCore.QSize(16, 16))
         Window.addToolBar(QtCore.Qt.TopToolBarArea, self.drawingToolbar)
-
-        Window.setWindowTitle(QtCore.QCoreApplication.translate(
-            "Window", "Pint-Point"))
-        self.menuFIle.setTitle(QtCore.QCoreApplication.translate(
-            "Window", "Файл"))
-        self.menuEdit.setTitle(QtCore.QCoreApplication.translate(
-            "Window", "Редактировать"))
-        self.menuHelp.setTitle(QtCore.QCoreApplication.translate(
-            "Window", "Помощь"))
-        self.actionClearImage.setText(QtCore.QCoreApplication.translate(
-            "Window", "Очистить"))
-        self.actionClearImage.setShortcut(QtCore.QCoreApplication.translate(
-            "Window", "Ctrl+D"))
-        self.actionHelpToUse.setText(QtCore.QCoreApplication.translate(
-            "Window", "Помощь"))
-        self.actionHelpToUse.setShortcut(QtCore.QCoreApplication.translate(
-            "Window", "Ctrl+H"))
-        self.actioneBackStep.setText(QtCore.QCoreApplication.translate(
-            "Window", "Undo"))
-        self.actioneBackStep.setShortcut(QtCore.QCoreApplication.translate(
-            "Window", "Ctrl+Z"))
-        self.actionSaveImage.setText(QtCore.QCoreApplication.translate(
-            "Window", "Сохранить изображение как"))
-        self.actionSaveImage.setShortcut(QtCore.QCoreApplication.translate(
-            "Window", "Ctrl+S"))
+        self.retranslateUi(Window)
         QtCore.QMetaObject.connectSlotsByName(Window)
 
+    def retranslateUi(self, Window):
+        _translate = QtCore.QCoreApplication.translate
+        Window.setWindowTitle(_translate("Window", "Pint-Point"))
+        self.menuFIle.setTitle(_translate("Window", "Файл"))
+        self.menuEdit.setTitle(_translate("Window", "Редактировать"))
+        self.menuHelp.setTitle(_translate("Window", "Помощь"))
+        self.actionClearImage.setText(_translate("Window", "Очистить"))
+        self.actionClearImage.setShortcut(_translate("Window", "Ctrl+D"))
+        self.actionHelpToUse.setText(_translate("Window", "Помощь"))
+        self.actionHelpToUse.setShortcut(_translate("Window", "Ctrl+H"))
+        self.actioneBackStep.setText(_translate("Window", "Undo"))
+        self.actioneBackStep.setShortcut(
+            _translate("Window", "Ctrl+Z"))
+        self.actionOpenImage.setText(
+            _translate("Window", "Открыть изображение как"))
+        self.actionOpenImage.setShortcut(_translate("Window", "Ctrl+O"))
+        self.actionSaveImage.setText(
+            _translate("Window", "Сохранить изображение как"))
+        self.actionSaveImage.setShortcut(_translate("Window", "Ctrl+S"))
 
-# Скрипт холста
 
-# Режимы
+# Скрипт для холста
 
-regimes = [
-    'eraser', 'fill',
-    'brush', 'spray',
-    'rect', 'polygon',
-    'ellipse'
-]
+# Режимы (кисточка, стиралка и др.)
+regimes = ['brush', 'eraser',
+           'spray', 'fill',
+           'rect', 'polygon',
+           'ellipse']
 
 
 # Класс холста
@@ -384,9 +353,6 @@ class Canvas(QLabel):
 
     def set_config(self, key, value):
         self.config[key] = value
-
-    active_color = None
-    timer_event = None
 
     active_color = None
     timer_event = None
@@ -436,10 +402,8 @@ class Canvas(QLabel):
 
         self.position_change_history = None
         self.last_history = []
-
         self.dash_offset = 0
         self.locked = False
-
         self.regime = regime
 
     # Функция сброса
@@ -457,12 +421,12 @@ class Canvas(QLabel):
 
     def timer_cleanup(self):
         if self.timer_event:
-            # Остановим таймер, затем запустите очистку.
+            # Остановим таймер, затем запуститим очистку
             timer_event = self.timer_event
             self.timer_event = None
             timer_event(final=True)
 
-    # События мыши.
+    # События мыши
 
     def mousePressEvent(self, mouse):
         if getattr(self, "%s_mousePressEvent" % self.regime, None):
@@ -487,8 +451,7 @@ class Canvas(QLabel):
             return getattr(self, "%s_mouseDoubleClickEvent" % self.regime,
                            None)(mouse)
 
-    """ Общие события (общие для инструментов, похожих на кисть 
-    (т.е кисточка, ластик, баллончик(распылитель)))"""
+    # Общие события для кисточки, ластика, распылителя
 
     def generic_mousePressEvent(self, mouse):
         self.last_pos = mouse.pos()
@@ -630,6 +593,7 @@ class Canvas(QLabel):
             self.numkat += 1
             pixmap = self.pixmap()
             pixmap.save('screens\picture' + str(self.numkat), "PNG")
+
     # Общие события для фигур как многоугольник (Четырехугольник, многоугольник, эллипс)
 
     def generic_shape_mousePressEvent(self, e):
@@ -784,20 +748,23 @@ class Canvas(QLabel):
         pixmap.save('screens\picture' + str(self.numkat), "PNG")
 
 
-# Главный собирающий класс включающий в себя классы canvas и window_,
+# Главный собирающий класс включающий в себя классы canvas и UI_Window,
 # а также реализирующий их
 
-class MainWindow(QMainWindow, Window_, ):
+class MainWindow(QMainWindow, UI_Window, ):
     def __init__(self, *args, **kwargs):
         super(MainWindow, self).__init__(*args, **kwargs)
+        self.setFixedSize(700, 475)
         self.ui_for_project(self)
         self.setWindowIcon(QIcon('icons/paint.png'))
 
         self.HorizontalLayout.removeWidget(self.canvas)
         self.canvas = Canvas()
         self.canvas.initialize()
-        '''Нам нужно включить отслеживание мыши, 
-        чтобы следовать за мышью без нажатия кнопки.'''
+        '''
+        Нам нужно включить отслеживание мыши, 
+        чтобы следовать за мышью без нажатия кнопки.
+        '''
         self.canvas.setMouseTracking(True)
         # Включить фокус для захвата ключевых входов.
         self.canvas.setFocusPolicy(Qt.StrongFocus)
@@ -851,6 +818,7 @@ class MainWindow(QMainWindow, Window_, ):
         # Меню опций
 
         self.actionNewImage.triggered.connect(self.canvas.initialize)
+        self.actionOpenImage.triggered.connect(self.open)
         self.actionHelpToUse.triggered.connect(self.help)
         self.actionSaveImage.triggered.connect(self.save)
         self.actioneBackStep.triggered.connect(self.UnDo)
@@ -915,6 +883,32 @@ class MainWindow(QMainWindow, Window_, ):
         if path:
             pixmap = self.canvas.pixmap()
             pixmap.save(path, "PNG")
+
+    def open(self):
+        path, _ = QFileDialog.getSaveFileName(
+            self, "Save file", "",
+            "JPEG Image file (*.jpg)")
+        pixmap = QPixmap()
+        pixmap.load(path)
+
+        iw = pixmap.width()
+        ih = pixmap.height()
+
+        if iw / 600 < ih / 400:  # The height is relatively bigger than the width.
+            pixmap = pixmap.scaledToWidth(600)
+            hoff = (pixmap.height() - 400) // 2
+            pixmap = pixmap.copy(
+                QRect(QPoint(0, hoff), QPoint(600, pixmap.height() - hoff))
+            )
+
+        elif iw / 600 > ih / 400:  # The height is relatively bigger than the width.
+            pixmap = pixmap.scaledToHeight(400)
+            woff = (pixmap.width() - 600) // 2
+            pixmap = pixmap.copy(
+                QRect(QPoint(woff, 0), QPoint(pixmap.width() - woff, 400))
+            )
+
+        self.canvas.setPixmap(pixmap)
 
 
 if __name__ == '__main__':

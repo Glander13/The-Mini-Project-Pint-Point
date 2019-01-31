@@ -76,6 +76,7 @@ class UI_Window(object):
                             QtGui.QIcon.Off)
         self.brushButton.setIcon(BrushIcon)
         self.brushButton.setCheckable(True)
+        self.brushButton.setToolTip("Кисточка")
         self.gridLayout.addWidget(self.brushButton, 1, 0, 1, 1)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed,
                                            QtWidgets.QSizePolicy.Fixed)
@@ -99,8 +100,9 @@ class UI_Window(object):
                              QtGui.QIcon.Off)
         self.eraserButton.setIcon(Erasericon)
         self.eraserButton.setCheckable(True)
-
+        self.eraserButton.setToolTip("Ластик")
         self.gridLayout.addWidget(self.eraserButton, 1, 1, 1, 1)
+
         # Распылитель
         self.sprayButton = QtWidgets.QPushButton(self.Widget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum,
@@ -119,7 +121,9 @@ class UI_Window(object):
         self.sprayButton.setIcon(SprayIcon)
         self.sprayButton.setCheckable(True)
         self.sprayButton.setFlat(False)
+        self.sprayButton.setToolTip("Распылитель")
         self.gridLayout.addWidget(self.sprayButton, 2, 0, 1, 1)
+
         # Заливка
         self.fillButton = QtWidgets.QPushButton(self.Widget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed,
@@ -138,6 +142,7 @@ class UI_Window(object):
                            QtGui.QIcon.Off)
         self.fillButton.setIcon(Fillicon)
         self.fillButton.setCheckable(True)
+        self.fillButton.setToolTip("Заливка")
         self.gridLayout.addWidget(self.fillButton, 2, 1, 1, 1)
         # Четырехугольник
         self.rectButton = QtWidgets.QPushButton(self.Widget)
@@ -150,6 +155,7 @@ class UI_Window(object):
             QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.rectButton.setIcon(QuadrilateralIcon)
         self.rectButton.setCheckable(True)
+        self.rectButton.setToolTip("Четырехугольник")
         self.gridLayout.addWidget(
             self.rectButton, 3, 0, 1, 1)
         sizePolicy = QtWidgets.QSizePolicy(
@@ -166,7 +172,6 @@ class UI_Window(object):
         self.polygonButton.setMinimumSize(QtCore.QSize(30, 30))
         self.polygonButton.setMaximumSize(QtCore.QSize(30, 30))
         self.polygonButton.setText("")
-
         Polygonicon = QtGui.QIcon()
         Polygonicon.addPixmap(QtGui.QPixmap("icons/Многоугольник.png"),
                               QtGui.QIcon.Normal,
@@ -174,6 +179,7 @@ class UI_Window(object):
 
         self.polygonButton.setIcon(Polygonicon)
         self.polygonButton.setCheckable(True)
+        self.polygonButton.setToolTip("Многоугольник")
         self.gridLayout.addWidget(self.polygonButton, 3, 1, 1, 1)
         # Эллипс
         self.ellipseButton = QtWidgets.QPushButton(self.Widget)
@@ -186,6 +192,7 @@ class UI_Window(object):
                               QtGui.QIcon.Off)
         self.ellipseButton.setIcon(EllipseIcon)
         self.ellipseButton.setCheckable(True)
+        self.ellipseButton.setToolTip("Эллипс")
         self.gridLayout.addWidget(self.ellipseButton, 4, 0, 1, 1)
 
         self.VerticalLayout_2.addWidget(self.Widget)
@@ -830,6 +837,7 @@ class MainWindow(QMainWindow, UI_Window, ):
         self.sizeselect.setRange(1, 20)
         self.sizeselect.setOrientation(Qt.Horizontal)
         self.sizeselect.valueChanged.connect(lambda s: self.canvas.set_config('size', s))
+        self.sizeselect.setToolTip("Размер кисточки или контура")
         self.drawingToolbar.addWidget(self.sizeselect)
 
         self.show()

@@ -693,6 +693,9 @@ class Canvas(QLabel):
 
     def rect_mouseReleaseEvent(self, e):
         self.generic_shape_mouseReleaseEvent(e)
+        self.numkat += 1
+        pixmap = self.pixmap()
+        pixmap.save('screens\picture' + str(self.numkat), "PNG")
 
     # Многоугольник
 
@@ -776,6 +779,9 @@ class Canvas(QLabel):
 
     def ellipse_mouseReleaseEvent(self, e):
         self.generic_shape_mouseReleaseEvent(e)
+        self.numkat += 1
+        pixmap = self.pixmap()
+        pixmap.save('screens\picture' + str(self.numkat), "PNG")
 
 
 # Главный собирающий класс включающий в себя классы canvas и window_,

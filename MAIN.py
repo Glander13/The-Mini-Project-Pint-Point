@@ -1,5 +1,6 @@
 import random
-from os import system
+import os, shutil
+from PIL import Image
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import *
@@ -294,6 +295,9 @@ class Window_(object):
         self.actionClearImage = QtWidgets.QAction(Window)
         self.actionClearImage.setObjectName("Очистка")
 
+        self.actioneBackStep = QtWidgets.QAction(Window)
+        self.actioneBackStep.setObjectName("Undo")
+
         self.actionHelpToUse = QtWidgets.QAction(Window)
         self.actionHelpToUse.setObjectName("Помощь")
 
@@ -310,6 +314,7 @@ class Window_(object):
         self.actionNewImage = QtWidgets.QAction(Window)
 
         self.menuFIle.addAction(self.actionSaveImage)
+        self.menuFIle.addAction(self.actioneBackStep)
 
         self.menuHelp.addAction(self.actionHelpToUse)
         self.menuEdit.addSeparator()
@@ -339,6 +344,10 @@ class Window_(object):
             "Window", "Помощь"))
         self.actionHelpToUse.setShortcut(QtCore.QCoreApplication.translate(
             "Window", "Ctrl+H"))
+        self.actioneBackStep.setText(QtCore.QCoreApplication.translate(
+            "Window", "Undo"))
+        self.actioneBackStep.setShortcut(QtCore.QCoreApplication.translate(
+            "Window", "Ctrl+Z"))
         self.actionSaveImage.setText(QtCore.QCoreApplication.translate(
             "Window", "Сохранить изображение как"))
         self.actionSaveImage.setShortcut(QtCore.QCoreApplication.translate(
@@ -357,10 +366,12 @@ regimes = [
     'ellipse'
 ]
 
+
 # Класс холста
 
 class Canvas(QLabel):
     regime = 'rectangle'
+    numkat = 0
 
     MainColor = QColor(Qt.black)  # Основной цвет
     SideColor = None  # Второй цвет
@@ -373,6 +384,9 @@ class Canvas(QLabel):
 
     def set_config(self, key, value):
         self.config[key] = value
+
+    active_color = None
+    timer_event = None
 
     active_color = None
     timer_event = None
@@ -425,7 +439,7 @@ class Canvas(QLabel):
 
         self.dash_offset = 0
         self.locked = False
-        # Применить режим
+
         self.regime = regime
 
     # Функция сброса
@@ -462,6 +476,9 @@ class Canvas(QLabel):
 
     def mouseReleaseEvent(self, mouse):
         if getattr(self, "%s_mouseReleaseEvent" % self.regime, None):
+            self.numkat += 1
+            pixmap = self.pixmap()
+            pixmap.save('screens\picture' + str(self.numkat), "PNG")
             return getattr(self, "%s_mouseReleaseEvent" % self.regime,
                            None)(mouse)
 
@@ -610,7 +627,9 @@ class Canvas(QLabel):
             p.setPen(QPen(self.active_color))
             p.drawPoints(*[QPoint(*xy) for xy in to_fill])
             self.update()
-
+            self.numkat += 1
+            pixmap = self.pixmap()
+            pixmap.save('screens\picture' + str(self.numkat), "PNG")
     # Общие события для фигур как многоугольник (Четырехугольник, многоугольник, эллипс)
 
     def generic_shape_mousePressEvent(self, e):
@@ -685,7 +704,9 @@ class Canvas(QLabel):
                 self.position_change_history = [e.pos()]
                 self.current_position = e.pos()
                 self.timer_event = self.Polygon_timerEvent
-
+            self.numkat += 1
+            pixmap = self.pixmap()
+            pixmap.save('screens\picture' + str(self.numkat), "PNG")
         elif e.button() == Qt.RightButton and self.position_change_history:
             # Убираем, мы не рисуем
             self.timer_cleanup()
@@ -760,14 +781,12 @@ class Canvas(QLabel):
 # Главный собирающий класс включающий в себя классы canvas и window_,
 # а также реализирующий их
 
-class MainWindow(QMainWindow, Window_):
-
+class MainWindow(QMainWindow, Window_, ):
     def __init__(self, *args, **kwargs):
         super(MainWindow, self).__init__(*args, **kwargs)
         self.ui_for_project(self)
         self.setWindowIcon(QIcon('icons/paint.png'))
 
-        # Заменим заполнитель холста из класса Window_
         self.HorizontalLayout.removeWidget(self.canvas)
         self.canvas = Canvas()
         self.canvas.initialize()
@@ -781,6 +800,23 @@ class MainWindow(QMainWindow, Window_):
         # Настроим кнопки режима
         regime_group = QButtonGroup(self)
         regime_group.setExclusive(True)
+        folder = 'screens'
+
+        for the_file in os.listdir(folder):
+            file_path = os.path.join(folder, the_file)
+            try:
+                if os.path.isfile(file_path):
+                    os.unlink(file_path)
+            except Exception as e:
+                print(e)
+
+        im = Image.new("RGB", (600, 400))
+        pix = im.load()
+        for x in range(600):
+            for y in range(400):
+                pix[x, y] = (255, 255, 255)
+
+        im.save('screens/picture0.png')
 
         for regime in regimes:
             btn = getattr(self, '%sButton' % regime)
@@ -811,6 +847,7 @@ class MainWindow(QMainWindow, Window_):
         self.actionNewImage.triggered.connect(self.canvas.initialize)
         self.actionHelpToUse.triggered.connect(self.help)
         self.actionSaveImage.triggered.connect(self.save)
+        self.actioneBackStep.triggered.connect(self.UnDo)
         self.actionClearImage.triggered.connect(self.canvas.reset)
 
         # Размер для кисточки, контура фигур, ластика и баллончика (расспылителя)
@@ -846,6 +883,21 @@ class MainWindow(QMainWindow, Window_):
 
     def help(self):
         system('start ПрочтиМеня.txt')
+
+    # Функция Back_Step
+
+    def UnDo(self):
+        try:
+            if self.canvas.numkat > 0:
+                self.canvas.numkat -= 1
+                pixmap = QPixmap()
+                pixmap.load('screens\picture' + str(self.canvas.numkat))
+                self.canvas.setPixmap(pixmap)
+                os.remove("screens\picture" + str(self.canvas.numkat + 1))
+            else:
+                pass
+        except:
+            pass
 
     # Функция сохранения
 

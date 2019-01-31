@@ -18,7 +18,6 @@ from os import system
 """
 
 
-
 class UI_Window(object):
     def ui_for_project(self, Window):
         self.centralWidget = QtWidgets.QWidget(Window)
@@ -535,9 +534,14 @@ class Canvas(QLabel):
             p = QPainter(self.pixmap())
             p.setPen(QPen(self.active_color, 1))
 
-            for n in range(self.config['size'] * 100):  # Можно изменить умножатель(по умолчанию стоит 100)
-                xo = random.gauss(0, self.config['size'] * 5)  # чем он больше, тем "жирнее" будет рисовать
-                yo = random.gauss(0, self.config['size'] * 5)  # распылитель
+            for n in range(self.config['size'] * 100):
+                '''
+                Можно изменить умножатель(по умолчанию стоит 100)
+                чем он больше, тем "жирнее" будет рисовать
+                распылитель
+                '''
+                xo = random.gauss(0, self.config['size'] * 5)
+                yo = random.gauss(0, self.config['size'] * 5)
                 p.drawPoint(e.x() + xo, e.y() + yo)
 
         self.update()
@@ -564,8 +568,8 @@ class Canvas(QLabel):
         target_color = s[i:i + 3]
 
         # Конвертирование байтовой строки в 1 байт. True - 255, False - 0
-        s = b''.join(b'\xff' if s[n:n + 3] == target_color else b'\x00' for n in range(
-            0, len(s), 4))
+        s = b''.join(b'\xff' if s[n:n + 3] == target_color else b'\x00'
+                     for n in range(0, len(s), 4))
 
         def get_pixel(x, y):
             return s[x + (y * w)]
@@ -579,8 +583,8 @@ class Canvas(QLabel):
             cx, cy = center_pos
             for x, y in [(1, 0), (0, 1), (-1, 0), (0, -1)]:
                 xx, yy = cx + x, cy + y
-                if (xx >= 0 and xx < w and yy >= 0 and yy < h
-                        and ((xx, yy) not in have_seen)):
+                if (xx >= 0 and xx < w and yy >= 0 and yy < h and (
+                        (xx, yy) not in have_seen)):
                     points.append((xx, yy))
                     have_seen.add((xx, yy))
             return points
@@ -601,7 +605,10 @@ class Canvas(QLabel):
             pixmap = self.pixmap()
             pixmap.save('screens\picture' + str(self.numkat), "PNG")
 
-    # Общие события для фигур как многоугольник (Четырехугольник, многоугольник, эллипс)
+    '''
+    Общие события для фигур как многоугольник 
+    (Четырехугольник, многоугольник, эллипс)
+    '''
 
     def generic_shape_mousePressEvent(self, e):
         self.origin_pos = e.pos()
@@ -623,7 +630,9 @@ class Canvas(QLabel):
             pen.setDashOffset(self.dash_offset)
             p.setPen(pen)
             getattr(p, self.active_shape_function)(QRect(
-                self.origin_pos, self.current_position), *self.active_shape_args)
+                self.origin_pos,
+                self.current_position),
+                *self.active_shape_args)
 
         self.update()
         self.last_pos = self.current_position
@@ -704,7 +713,8 @@ class Canvas(QLabel):
 
         self.update()
         self.last_pos = self.current_position
-        self.last_history = self.position_change_history + [self.current_position]
+        self.last_history = \
+            self.position_change_history + [self.current_position]
 
     def generic_poly_mouseMoveEvent(self, e):
         self.current_position = e.pos()
@@ -716,7 +726,8 @@ class Canvas(QLabel):
                       self.config['size'], Qt.SolidLine, Qt.RoundCap,
                       Qt.RoundJoin))
 
-        getattr(p, self.active_shape_function)(*self.position_change_history + [e.pos()])
+        getattr(p, self.active_shape_function)(
+            *self.position_change_history + [e.pos()])
         self.update()
         self.reset_mode()
 
@@ -831,12 +842,16 @@ class MainWindow(QMainWindow, UI_Window, ):
         self.actioneBackStep.triggered.connect(self.UnDo)
         self.actionClearImage.triggered.connect(self.canvas.reset)
 
-        # Размер для кисточки, контура фигур, ластика и баллончика (расспылителя)
+        '''
+        Размер для кисточки, контура фигур, 
+        ластика и расспылителя
+        '''
 
         self.sizeselect = QSlider()
         self.sizeselect.setRange(1, 20)
         self.sizeselect.setOrientation(Qt.Horizontal)
-        self.sizeselect.valueChanged.connect(lambda s: self.canvas.set_config('size', s))
+        self.sizeselect.valueChanged.connect(lambda s:
+                                             self.canvas.set_config('size', s))
         self.sizeselect.setToolTip("Размер кисточки или контура")
         self.drawingToolbar.addWidget(self.sizeselect)
 
@@ -853,13 +868,15 @@ class MainWindow(QMainWindow, UI_Window, ):
 
     def install_maincolor(self, e):
         self.canvas.install_maincolor(e)
-        self.MainButton.setStyleSheet('QPushButton { background-color: %s; }' % e)
+        self.MainButton.setStyleSheet(
+            'QPushButton { background-color: %s; }' % e)
 
     # Функция для установки выбранного цвета на второй
 
     def install_sidecolor(self, e):
         self.canvas.install_sidecolor(e)
-        self.SideButton.setStyleSheet('QPushButton { background-color: %s; }' % e)
+        self.SideButton.setStyleSheet(
+            'QPushButton { background-color: %s; }' % e)
 
     # функция Помощи
 
@@ -886,7 +903,7 @@ class MainWindow(QMainWindow, UI_Window, ):
     def save(self):
         path, _ = QFileDialog.getSaveFileName(
             self, "Save file", "",
-            "PNG Image file (*.png);; JPEG Image file (*.jpg);;All Files (*.*)")
+            "PNG Image file (*.png);; JPEG Image file (*.jpg);;")
 
         if path:
             pixmap = self.canvas.pixmap()
@@ -902,14 +919,14 @@ class MainWindow(QMainWindow, UI_Window, ):
         iw = pixmap.width()
         ih = pixmap.height()
 
-        if iw / 600 < ih / 400:  # The height is relatively bigger than the width.
+        if iw / 600 < ih / 400:  # Высота больше, чем ширина.
             pixmap = pixmap.scaledToWidth(600)
             hoff = (pixmap.height() - 400) // 2
             pixmap = pixmap.copy(
                 QRect(QPoint(0, hoff), QPoint(600, pixmap.height() - hoff))
             )
 
-        elif iw / 600 > ih / 400:  # The height is relatively bigger than the width.
+        elif iw / 600 > ih / 400:  # Ширина больше, чем высота.
             pixmap = pixmap.scaledToHeight(400)
             woff = (pixmap.width() - 600) // 2
             pixmap = pixmap.copy(

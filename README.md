@@ -7,7 +7,7 @@ The Mini-Project Pint-Point (Аналог Paint)
 
 [Комплектация]
 
-Pint-Point - .exe файл (конечный продукт) 
+PintPoint - .exe файл (конечный продукт) 
 
 папка icons с иконками для приложения
 

@@ -230,16 +230,16 @@ class UI_Window(object):
         self.SideButton.setGeometry(QtCore.QRect(30, 10, 40, 40))
         self.SideButton.setMinimumSize(QtCore.QSize(40, 40))
         self.SideButton.setMaximumSize(QtCore.QSize(40, 40))
+        self.SideButton.setToolTip("Второй цвет")
         self.SideButton.setText("")
-        self.SideButton.setObjectName("Побочная кнопка цвета")
 
         # Главная кнопка цвета
         self.MainButton = QtWidgets.QPushButton(self.Widget_2)
         self.MainButton.setGeometry(QtCore.QRect(10, 0, 40, 40))
         self.MainButton.setMinimumSize(QtCore.QSize(40, 40))
         self.MainButton.setMaximumSize(QtCore.QSize(40, 40))
+        self.MainButton.setToolTip("Первый цвет")
         self.MainButton.setText("")
-        self.MainButton.setObjectName("Главная кнопка цвета")
 
         self.VerticalLayout_2.addWidget(self.Widget_2)
 
@@ -256,32 +256,50 @@ class UI_Window(object):
 
         self.menuBar = QtWidgets.QMenuBar(Window)
         self.menuBar.setGeometry(QtCore.QRect(0, 0, 549, 22))
-        self.menuBar.setObjectName("MENU BAR")
 
         # Меню файла
         self.menuFIle = QtWidgets.QMenu(self.menuBar)
-        self.menuFIle.setObjectName("Меню файла")
 
         # Меню редакции
         self.menuEdit = QtWidgets.QMenu(self.menuBar)
-        self.menuEdit.setObjectName("Меню редакции")
 
         # Меню помощь
         self.menuHelp = QtWidgets.QMenu(self.menuBar)
-        self.menuHelp.setObjectName("Меню помощь")
 
         Window.setMenuBar(self.menuBar)
 
         self.actionClearImage = QtWidgets.QAction(Window)
-        self.actionClearImage.setObjectName("Очистка")
+
+        ClearIcon = QtGui.QIcon()
+        ClearIcon.addPixmap(QtGui.QPixmap('icons/Очистка.png'),
+                           QtGui.QIcon.Normal,
+                           QtGui.QIcon.Off)
+        self.actionClearImage.setIcon(ClearIcon)
 
         self.actioneBackStep = QtWidgets.QAction(Window)
-        self.actioneBackStep.setObjectName("Undo")
+
+        UndoIcon = QtGui.QIcon()
+        UndoIcon.addPixmap(QtGui.QPixmap(
+            'icons/Отмена последнего действия.png'),
+            QtGui.QIcon.Normal,
+            QtGui.QIcon.Off)
+        self.actioneBackStep.setIcon(UndoIcon)
 
         self.actionHelpToUse = QtWidgets.QAction(Window)
-        self.actionHelpToUse.setObjectName("Помощь")
 
+        HelpIcon = QtGui.QIcon()
+        HelpIcon.addPixmap(QtGui.QPixmap('icons/Помощь.png'),
+                           QtGui.QIcon.Normal,
+                           QtGui.QIcon.Off)
+        self.actionHelpToUse.setIcon(HelpIcon)
+        
         self.actionOpenImage = QtWidgets.QAction(Window)
+
+        OpenIcon = QtGui.QIcon()
+        OpenIcon.addPixmap(QtGui.QPixmap('icons/Открытие файла.png'),
+                           QtGui.QIcon.Normal,
+                           QtGui.QIcon.Off)
+        self.actionOpenImage.setIcon(OpenIcon)
 
         self.actionSaveImage = QtWidgets.QAction(Window)
 
@@ -291,7 +309,6 @@ class UI_Window(object):
                            QtGui.QIcon.Off)
 
         self.actionSaveImage.setIcon(SaveIcon)
-        self.actionSaveImage.setObjectName("Сохранение")
 
         self.actionNewImage = QtWidgets.QAction(Window)
         self.menuFIle.addAction(self.actionOpenImage)
@@ -318,11 +335,13 @@ class UI_Window(object):
         self.menuFIle.setTitle(_translate("Window", "Файл"))
         self.menuEdit.setTitle(_translate("Window", "Редактировать"))
         self.menuHelp.setTitle(_translate("Window", "Помощь"))
-        self.actionClearImage.setText(_translate("Window", "Очистить"))
+        self.actionClearImage.setText(_translate("Window", "Очистить холст"))
         self.actionClearImage.setShortcut(_translate("Window", "Ctrl+D"))
         self.actionHelpToUse.setText(_translate("Window", "Помощь"))
         self.actionHelpToUse.setShortcut(_translate("Window", "Ctrl+H"))
-        self.actioneBackStep.setText(_translate("Window", "Undo"))
+        self.actioneBackStep.setText(_translate("Window",
+                                                "Отменить последнее действие")
+                                     )
         self.actioneBackStep.setShortcut(
             _translate("Window", "Ctrl+Z"))
         self.actionOpenImage.setText(
@@ -912,7 +931,7 @@ class MainWindow(QMainWindow, UI_Window, ):
     def open(self):
         path, _ = QFileDialog.getSaveFileName(
             self, "Save file", "",
-            "JPEG Image file (*.jpg)")
+            "JPEG Image file (*.jpg);; JPEG Image file (*.jpg);;")
         pixmap = QPixmap()
         pixmap.load(path)
 

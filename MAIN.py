@@ -272,8 +272,8 @@ class UI_Window(object):
 
         ClearIcon = QtGui.QIcon()
         ClearIcon.addPixmap(QtGui.QPixmap('icons/Очистка.png'),
-                           QtGui.QIcon.Normal,
-                           QtGui.QIcon.Off)
+                            QtGui.QIcon.Normal,
+                            QtGui.QIcon.Off)
         self.actionClearImage.setIcon(ClearIcon)
 
         self.actioneBackStep = QtWidgets.QAction(Window)
@@ -292,7 +292,7 @@ class UI_Window(object):
                            QtGui.QIcon.Normal,
                            QtGui.QIcon.Off)
         self.actionHelpToUse.setIcon(HelpIcon)
-        
+
         self.actionOpenImage = QtWidgets.QAction(Window)
 
         OpenIcon = QtGui.QIcon()

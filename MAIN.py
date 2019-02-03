@@ -211,6 +211,7 @@ class UI_Window(object):
             self.canvas.sizePolicy().hasHeightForWidth())
         self.canvas.setSizePolicy(sizePolicy)
         self.canvas.setText("")
+        self.canvas.setToolTip("Холст")
 
         self.HorizontalLayout.addWidget(self.canvas)
 
@@ -922,7 +923,10 @@ class MainWindow(QMainWindow, UI_Window, ):
     def save(self):
         path, _ = QFileDialog.getSaveFileName(
             self, "Save file", "",
-            "PNG Image file (*.png);; JPEG Image file (*.jpg);;")
+            "PNG(Portable Network Graphics) Image file (*.png);; "
+            "JPEG(Joint Photographic Experts Group) Image file (*.jpg);; "
+            "ICO Image file (*.ico);; "
+            "WebP Image file (*.webp)")
 
         if path:
             pixmap = self.canvas.pixmap()
@@ -931,28 +935,32 @@ class MainWindow(QMainWindow, UI_Window, ):
     def open(self):
         path, _ = QFileDialog.getSaveFileName(
             self, "Save file", "",
-            "JPEG Image file (*.jpg);; JPEG Image file (*.jpg);;")
-        pixmap = QPixmap()
-        pixmap.load(path)
+            "PNG(Portable Network Graphics) Image file (*.png);; "
+            "JPEG(Joint Photographic Experts Group) Image file (*.jpg);; "
+            "ICO Image file (*.ico);; "
+            "WebP Image file (*.webp)")
+        if path:
+            pixmap = QPixmap()
+            pixmap.load(path)
 
-        iw = pixmap.width()
-        ih = pixmap.height()
+            iw = pixmap.width()
+            ih = pixmap.height()
 
-        if iw / 600 < ih / 400:  # Высота больше, чем ширина.
-            pixmap = pixmap.scaledToWidth(600)
-            hoff = (pixmap.height() - 400) // 2
-            pixmap = pixmap.copy(
-                QRect(QPoint(0, hoff), QPoint(600, pixmap.height() - hoff))
-            )
+            if iw / 600 < ih / 400:  # Высота больше, чем ширина.
+                pixmap = pixmap.scaledToWidth(600)
+                hoff = (pixmap.height() - 400) // 2
+                pixmap = pixmap.copy(
+                    QRect(QPoint(0, hoff), QPoint(600, pixmap.height() - hoff))
+                )
 
-        elif iw / 600 > ih / 400:  # Ширина больше, чем высота.
-            pixmap = pixmap.scaledToHeight(400)
-            woff = (pixmap.width() - 600) // 2
-            pixmap = pixmap.copy(
-                QRect(QPoint(woff, 0), QPoint(pixmap.width() - woff, 400))
-            )
+            elif iw / 600 > ih / 400:  # Ширина больше, чем высота.
+                pixmap = pixmap.scaledToHeight(400)
+                woff = (pixmap.width() - 600) // 2
+                pixmap = pixmap.copy(
+                    QRect(QPoint(woff, 0), QPoint(pixmap.width() - woff, 400))
+                )
 
-        self.canvas.setPixmap(pixmap)
+            self.canvas.setPixmap(pixmap)
 
 
 if __name__ == '__main__':

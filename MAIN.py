@@ -365,7 +365,7 @@ regimes = ['brush', 'eraser',
 # Класс холста
 
 class Canvas(QLabel):
-    regime = 'rectangle'
+    regime = ''
     numkat = 0
 
     MainColor = QColor(Qt.black)  # Основной цвет
